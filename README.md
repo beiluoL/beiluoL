@@ -16,7 +16,7 @@
 
 - 🔭 全栈开发工程师，专注 **Java 后端 + 前端技术深度融合**
 - 🌱 当前探索：**AI 全栈应用** — 大模型对话系统、RAG 知识库、AI Agent 工作流
-- ✍️ 活跃于技术社区：[博客园](https://www.cnblogs.com/beiluoL) · [CSDN](https://blog.csdn.net/beiluoL)
+- ✍️ 活跃于技术社区：[博客园](https://www.cnblogs.com/beiluoL) · [CSDN](https://blog.csdn.net/beiluoL) · [Gitee](https://gitee.com/beiluol)
 - 💬 个人学习公众号：**「北落拾光」** — 分享全栈开发与 AI 实战
 - 📫 联系邮箱：**710980260@qq.com**
 
@@ -83,6 +83,9 @@
   </a>
   <a href="https://blog.csdn.net/beiluoL">
     <img src="https://img.shields.io/badge/CSDN-beiluoL-FC5531?style=flat-square&logo=c&logoColor=white" />
+  </a>
+  <a href="https://gitee.com/beiluol">
+    <img src="https://img.shields.io/badge/Gitee-beiluol-C71D27?style=flat-square&logo=gitee&logoColor=white" />
   </a>
 </p>
 
