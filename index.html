@@ -819,6 +819,7 @@ const T = {
 };
 
 let lang = localStorage.getItem('lang') || 'zh';
+let typeTimer = null;
 
 function setLang(l) {
   lang = l;
@@ -879,7 +880,6 @@ function closeMenu() {
 }
 
 // === Typewriter ===
-let typeTimer = null;
 function startTypewriter() {
   if (typeTimer) clearInterval(typeTimer);
   const el = document.getElementById('typewriter');
