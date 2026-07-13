@@ -34,25 +34,44 @@
       overflow-x: hidden;
     }
 
+    /* === Scroll Progress Bar === */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 200;
+      background: linear-gradient(90deg, #8b5cf6, #06b6d4, #22c55e);
+      width: 0%; transition: width 0.1s linear;
+    }
+
     /* === Ambient Background === */
     .ambient {
       position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
     }
     .ambient .orb {
-      position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.12;
+      position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.1;
+      animation: orbFloat 20s ease-in-out infinite;
     }
-    .ambient .orb-1 { width: 600px; height: 600px; background: #8b5cf6; top: -10%; right: -5%; }
-    .ambient .orb-2 { width: 500px; height: 500px; background: #06b6d4; bottom: 10%; left: -10%; }
-    .ambient .orb-3 { width: 400px; height: 400px; background: #6366f1; top: 50%; right: 30%; }
+    .ambient .orb-1 { width: 600px; height: 600px; background: #8b5cf6; top: -10%; right: -5%; animation-delay: 0s; }
+    .ambient .orb-2 { width: 500px; height: 500px; background: #06b6d4; bottom: 10%; left: -10%; animation-delay: -7s; }
+    .ambient .orb-3 { width: 400px; height: 400px; background: #6366f1; top: 50%; right: 30%; animation-delay: -14s; }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.05); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
 
     /* === Navigation === */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 0 40px; height: 64px;
       display: flex; align-items: center; justify-content: space-between;
-      background: rgba(9, 9, 11, 0.7);
-      backdrop-filter: blur(24px) saturate(1.4);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(9, 9, 11, 0.6);
+      backdrop-filter: blur(24px) saturate(1.8);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(9, 9, 11, 0.85);
+      border-bottom-color: rgba(255,255,255,0.08);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
     }
 
     .logo {
@@ -66,8 +85,10 @@
     .nav-link {
       padding: 7px 16px; border-radius: 8px; font-size: 0.875rem;
       color: var(--text-muted); text-decoration: none; transition: all 0.2s;
+      position: relative;
     }
     .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+    .nav-link.active { color: var(--accent); }
 
     .lang-switch {
       display: flex; margin-left: 12px;
@@ -83,11 +104,42 @@
       box-shadow: 0 2px 8px rgba(139,92,246,0.4);
     }
 
+    /* Mobile menu */
+    .menu-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 32px; height: 32px; position: relative;
+    }
+    .menu-toggle span {
+      display: block; width: 22px; height: 2px; background: var(--text);
+      position: absolute; left: 5px; transition: all 0.3s;
+    }
+    .menu-toggle span:nth-child(1) { top: 9px; }
+    .menu-toggle span:nth-child(2) { top: 15px; }
+    .menu-toggle span:nth-child(3) { top: 21px; }
+    .menu-toggle.open span:nth-child(1) { transform: rotate(45deg); top: 15px; }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg); top: 15px; }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+      background: rgba(9,9,11,0.95); backdrop-filter: blur(20px);
+      z-index: 99; padding: 32px; flex-direction: column; gap: 8px;
+    }
+    .mobile-menu.show { display: flex; }
+    .mobile-menu a {
+      display: block; padding: 14px 20px; border-radius: 12px;
+      color: var(--text); text-decoration: none; font-size: 1.1rem; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .mobile-menu a:hover { background: rgba(255,255,255,0.06); }
+
     /* === Hero === */
     .hero {
       min-height: 100vh; display: flex; align-items: center;
       padding: 100px 40px 80px; max-width: 1100px; margin: 0 auto;
     }
+    .hero-content { display: flex; align-items: center; gap: 60px; width: 100%; }
+    .hero-text { flex: 1; }
 
     .hero-tag {
       display: inline-flex; align-items: center; gap: 8px;
@@ -109,12 +161,31 @@
     .hero h1 .gradient-text {
       background: linear-gradient(135deg, #c084fc 0%, #818cf8 50%, #38bdf8 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-size: 200% auto;
+      animation: gradientShift 4s ease infinite;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+      100% { background-position: 0% center; }
     }
 
     .hero-sub {
       font-size: 1.2rem; color: var(--text-muted); max-width: 580px;
       margin-bottom: 36px; font-weight: 300;
     }
+
+    /* Typewriter */
+    .typewriter {
+      font-family: 'JetBrains Mono', monospace; font-size: 1rem;
+      color: var(--accent); margin-bottom: 28px; min-height: 1.5em;
+    }
+    .typewriter .cursor {
+      display: inline-block; width: 2px; height: 1.1em;
+      background: var(--accent); margin-left: 2px;
+      animation: blink 1s step-end infinite; vertical-align: text-bottom;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
 
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
@@ -134,6 +205,26 @@
       border: 1px solid var(--border);
     }
     .btn-ghost:hover { border-color: var(--accent); background: rgba(139,92,246,0.08); }
+
+    /* Avatar */
+    .hero-avatar {
+      flex-shrink: 0; position: relative;
+    }
+    .avatar-ring {
+      width: 240px; height: 240px; border-radius: 50%;
+      background: linear-gradient(135deg, #8b5cf6, #06b6d4, #22c55e);
+      padding: 4px; animation: ringRotate 8s linear infinite;
+    }
+    @keyframes ringRotate { 100% { transform: rotate(360deg); } }
+    .avatar-ring img {
+      width: 100%; height: 100%; border-radius: 50%;
+      object-fit: cover; border: 4px solid var(--bg);
+    }
+    .avatar-glow {
+      position: absolute; inset: -20px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,92,246,0.15), transparent 70%);
+      z-index: -1;
+    }
 
     /* === Sections === */
     section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
@@ -155,7 +246,6 @@
 
     /* === About === */
     .about-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; }
-
     .about-text p { color: var(--text-muted); margin-bottom: 16px; font-size: 1rem; }
 
     .stats-row {
@@ -172,7 +262,6 @@
     }
     .stat .txt { font-size: 0.78rem; color: var(--text-dim); margin-top: 4px; }
 
-    /* Code block decoration */
     .code-card {
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius); overflow: hidden;
@@ -191,6 +280,38 @@
     .code-body .fn { color: #38bdf8; }
     .code-body .cm { color: #52525b; }
     .code-body .num { color: #f59e0b; }
+
+    /* === Timeline === */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
+      width: 2px; background: linear-gradient(to bottom, var(--accent), var(--accent-3), transparent);
+    }
+    .tl-item { position: relative; margin-bottom: 36px; }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -32px; top: 6px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--bg); border: 3px solid var(--accent);
+      z-index: 1;
+    }
+    .tl-item:first-child .tl-dot {
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(139,92,246,0.5);
+    }
+    .tl-date {
+      font-size: 0.8rem; color: var(--accent); font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .tl-title {
+      font-size: 1.05rem; font-weight: 700; margin-bottom: 2px;
+    }
+    .tl-company {
+      font-size: 0.88rem; color: var(--text-muted); margin-bottom: 8px;
+    }
+    .tl-desc {
+      font-size: 0.85rem; color: var(--text-dim); line-height: 1.7;
+    }
 
     /* === Skills === */
     .skills-row {
@@ -246,7 +367,7 @@
 
     /* === Blog Links === */
     .blogs-row {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;
     }
     .blog-card {
       background: var(--bg-card); border: 1px solid var(--border);
@@ -274,47 +395,67 @@
     /* === Contact === */
     .contact-box {
       background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 20px; padding: 56px 40px; text-align: center;
-      position: relative; overflow: hidden;
+      border-radius: var(--radius); padding: 56px 40px; text-align: center;
     }
-    .contact-box::before {
-      content: ''; position: absolute; top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: radial-gradient(circle at 30% 40%, rgba(139,92,246,0.06) 0%, transparent 50%);
+    .contact-box h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; }
+    .contact-box p { color: var(--text-muted); margin-bottom: 28px; }
+    .contact-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* === Back to Top === */
+    .back-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 90;
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--accent); color: white; border: none;
+      cursor: pointer; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(20px); pointer-events: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(139,92,246,0.4);
     }
-    .contact-box h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; position: relative; }
-    .contact-box p { color: var(--text-muted); margin-bottom: 32px; position: relative; }
-    .contact-btns {
-      display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
-      position: relative;
-    }
+    .back-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .back-top:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(139,92,246,0.6); }
 
     /* === Footer === */
     footer {
-      text-align: center; padding: 40px; color: var(--text-dim);
-      font-size: 0.82rem; border-top: 1px solid var(--border);
+      text-align: center; padding: 40px 20px; font-size: 0.85rem;
+      color: var(--text-dim); border-top: 1px solid var(--border);
     }
 
-    /* === Animations === */
+    /* === Reveal === */
     .reveal {
       opacity: 0; transform: translateY(24px);
       transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
     }
     .reveal.show { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
 
     /* === Responsive === */
     @media (max-width: 768px) {
       nav { padding: 0 16px; }
       .nav-link { display: none; }
+      .menu-toggle { display: block; }
       .hero { padding: 100px 20px 60px; }
+      .hero-content { flex-direction: column-reverse; text-align: center; gap: 32px; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .hero-avatar { display: flex; justify-content: center; }
+      .avatar-ring { width: 160px; height: 160px; }
+      .typewriter { text-align: center; }
       section { padding: 60px 20px; }
       .about-layout { grid-template-columns: 1fr; gap: 32px; }
       .projects-row { grid-template-columns: 1fr; }
+      .blogs-row { grid-template-columns: repeat(2, 1fr); }
       .contact-box { padding: 40px 20px; }
+      .contact-btns { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
 <body>
+
+<!-- Scroll Progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
 
 <div class="ambient">
   <div class="orb orb-1"></div>
@@ -323,10 +464,11 @@
 </div>
 
 <!-- Nav -->
-<nav>
+<nav id="navbar">
   <div class="logo">beiluoL</div>
   <div class="nav-right">
     <a href="#about" class="nav-link" data-i18n="nav_about">关于</a>
+    <a href="#experience" class="nav-link" data-i18n="nav_exp">经历</a>
     <a href="#skills" class="nav-link" data-i18n="nav_skills">技能</a>
     <a href="#projects" class="nav-link" data-i18n="nav_projects">项目</a>
     <a href="#blogs" class="nav-link" data-i18n="nav_blogs">博客</a>
@@ -336,25 +478,48 @@
       <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
   </div>
+  <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()" data-i18n="nav_about">关于</a>
+  <a href="#experience" onclick="closeMenu()" data-i18n="nav_exp">经历</a>
+  <a href="#skills" onclick="closeMenu()" data-i18n="nav_skills">技能</a>
+  <a href="#projects" onclick="closeMenu()" data-i18n="nav_projects">项目</a>
+  <a href="#blogs" onclick="closeMenu()" data-i18n="nav_blogs">博客</a>
+  <a href="#contact" onclick="closeMenu()" data-i18n="nav_contact">联系</a>
+  <a href="https://beiluol.github.io/resume" target="_blank" data-i18n="nav_resume">📄 在线简历</a>
+</div>
 
 <!-- Hero -->
 <section class="hero">
-  <div>
-    <div class="hero-tag">
-      <span class="pulse"></span>
-      <span data-i18n="hero_tag">开放合作 · 持续学习</span>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-tag">
+        <span class="pulse"></span>
+        <span data-i18n="hero_tag">开放合作 · 持续学习</span>
+      </div>
+      <h1>
+        <span data-i18n="hero_hi">你好，我是</span><br>
+        <span class="gradient-text">beiluoL</span>
+      </h1>
+      <div class="typewriter" id="typewriter"></div>
+      <p class="hero-sub" data-i18n="hero_sub">
+        全栈开发工程师 — 专注 Java 后端与前端技术深度融合，致力于打造高性能、高可用的 Web 应用与 AI 智能产品。
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-glow" data-i18n="hero_cta1">浏览项目 →</a>
+        <a href="https://beiluol.github.io/resume" target="_blank" class="btn btn-ghost" data-i18n="hero_cta3">📄 查看简历</a>
+      </div>
     </div>
-    <h1>
-      <span data-i18n="hero_hi">你好，我是</span><br>
-      <span class="gradient-text">beiluoL</span>
-    </h1>
-    <p class="hero-sub" data-i18n="hero_sub">
-      全栈开发工程师 — 专注 Java 后端与前端技术深度融合，致力于打造高性能、高可用的 Web 应用与 AI 智能产品。
-    </p>
-    <div class="hero-actions">
-      <a href="#projects" class="btn btn-glow" data-i18n="hero_cta1">浏览项目 →</a>
-      <a href="#blogs" class="btn btn-ghost" data-i18n="hero_cta2">技术博客</a>
+    <div class="hero-avatar">
+      <div class="avatar-glow"></div>
+      <div class="avatar-ring">
+        <img src="https://github.com/beiluoL.png" alt="beiluoL" />
+      </div>
     </div>
   </div>
 </section>
@@ -375,20 +540,20 @@
       </div>
       <div class="stats-row">
         <div class="stat">
-          <div class="num">3+</div>
+          <div class="num" data-count="5">0</div>
           <div class="txt" data-i18n="stat_exp">年开发经验</div>
         </div>
         <div class="stat">
-          <div class="num">10+</div>
+          <div class="num" data-count="10">0</div>
           <div class="txt" data-i18n="stat_proj">项目经历</div>
         </div>
         <div class="stat">
-          <div class="num">3000+</div>
+          <div class="num" data-count="3000">0</div>
           <div class="txt" data-i18n="stat_oss">行开源代码</div>
         </div>
       </div>
     </div>
-    <div class="code-card reveal">
+    <div class="code-card reveal reveal-delay-1">
       <div class="code-header">
         <span class="code-dot" style="background:#ef4444"></span>
         <span class="code-dot" style="background:#f59e0b"></span>
@@ -400,15 +565,47 @@
         &nbsp;&nbsp;name: <span class="str">'beiluoL'</span>,<br>
         &nbsp;&nbsp;role: <span class="str" data-i18n="code_role">'全栈开发工程师'</span>,<br>
         &nbsp;&nbsp;location: <span class="str" data-i18n="code_loc">'中国'</span>,<br>
-        &nbsp;&nbsp;stack: {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;backend: [<span class="str">'Java'</span>, <span class="str">'Spring'</span>, <span class="str">'MySQL'</span>],<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;frontend: [<span class="str">'React'</span>, <span class="str">'TS'</span>, <span class="str">'Next.js'</span>],<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;ai: [<span class="str">'Spring AI'</span>, <span class="str">'RAG'</span>, <span class="str">'Agent'</span>],<br>
-        &nbsp;&nbsp;},<br>
+        &nbsp;&nbsp;backend: [<span class="str">'Java'</span>, <span class="str">'Spring'</span>],<br>
+        &nbsp;&nbsp;frontend: [<span class="str">'React'</span>, <span class="str">'TS'</span>],<br>
+        &nbsp;&nbsp;ai: [<span class="str">'LLM'</span>, <span class="str">'RAG'</span>, <span class="str">'Agent'</span>],<br>
         &nbsp;&nbsp;blog: <span class="str">'北落拾光'</span>,<br>
-        &nbsp;&nbsp;<span class="fn">available</span>: <span class="num">true</span><br>
-        }
+        &nbsp;&nbsp;<span class="fn">motto</span>() {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="str">'Code with heart ❤️'</span><br>
+        &nbsp;&nbsp;}<br>
+        };
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience Timeline -->
+<section id="experience">
+  <div class="reveal">
+    <div class="sec-label" data-i18n="exp_label">工作经历</div>
+    <div class="sec-title" data-i18n="exp_title">成长之路</div>
+    <div class="sec-desc" data-i18n="exp_desc">每一步都在积累，每一段都有收获</div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date" data-i18n="tl1_date">2022.06 — 至今</div>
+      <div class="tl-title" data-i18n="tl1_role">全栈开发工程师</div>
+      <div class="tl-company" data-i18n="tl1_company">某某科技有限公司</div>
+      <div class="tl-desc" data-i18n="tl1_desc">主导核心业务系统架构设计，基于 Spring Cloud 微服务 + React 前端全栈开发。引入 AI 能力，构建智能客服与知识库问答系统，推动团队工程化与代码规范建设。</div>
+    </div>
+    <div class="tl-item reveal reveal-delay-1">
+      <div class="tl-dot"></div>
+      <div class="tl-date" data-i18n="tl2_date">2020.07 — 2022.05</div>
+      <div class="tl-title" data-i18n="tl2_role">Java 后端开发工程师</div>
+      <div class="tl-company" data-i18n="tl2_company">某某信息技术有限公司</div>
+      <div class="tl-desc" data-i18n="tl2_desc">负责电商平台后端开发，Spring Boot + MyBatis-Plus。优化数据库性能（响应时间降低 85%），设计异步消息系统（吞吐量提升 3 倍），参与单体到微服务架构迁移。</div>
+    </div>
+    <div class="tl-item reveal reveal-delay-2">
+      <div class="tl-dot"></div>
+      <div class="tl-date" data-i18n="tl3_date">2016.09 — 2020.06</div>
+      <div class="tl-title" data-i18n="tl3_role">计算机科学与技术 · 本科</div>
+      <div class="tl-company" data-i18n="tl3_school">某某大学</div>
+      <div class="tl-desc" data-i18n="tl3_desc">系统学习计算机基础知识，数据结构、算法、操作系统、网络、数据库。参与 ACM 竞赛，培养扎实的编程功底与逻辑思维能力。</div>
     </div>
   </div>
 </section>
@@ -424,33 +621,33 @@
     <div class="skill-group reveal">
       <h4><span class="emoji">⚙️</span> <span data-i18n="sk_be">后端开发</span></h4>
       <div class="tags">
-        <span class="tag">Java</span><span class="tag">Spring Boot</span>
-        <span class="tag">Spring Cloud</span><span class="tag">MyBatis</span>
-        <span class="tag">MySQL</span><span class="tag">Redis</span><span class="tag">Kafka</span>
+        <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Spring Cloud</span>
+        <span class="tag">MyBatis-Plus</span><span class="tag">MySQL</span><span class="tag">Redis</span>
+        <span class="tag">RabbitMQ</span><span class="tag">Kafka</span><span class="tag">Spring AI</span>
       </div>
     </div>
-    <div class="skill-group reveal">
+    <div class="skill-group reveal reveal-delay-1">
       <h4><span class="emoji">🎨</span> <span data-i18n="sk_fe">前端开发</span></h4>
       <div class="tags">
-        <span class="tag">React</span><span class="tag">TypeScript</span>
-        <span class="tag">Next.js</span><span class="tag">Vue 3</span>
-        <span class="tag">Tailwind</span><span class="tag">Vite</span>
+        <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Next.js</span>
+        <span class="tag">Vue 3</span><span class="tag">Tailwind CSS</span><span class="tag">Redux / Zustand</span>
+        <span class="tag">Vite</span><span class="tag">Webpack</span>
       </div>
     </div>
-    <div class="skill-group reveal">
+    <div class="skill-group reveal reveal-delay-2">
       <h4><span class="emoji">🤖</span> <span data-i18n="sk_ai">AI 应用</span></h4>
       <div class="tags">
-        <span class="tag">Spring AI</span><span class="tag">OpenAI</span>
-        <span class="tag">RAG</span><span class="tag">LangChain4j</span>
-        <span class="tag">Vector DB</span><span class="tag">Agent</span>
+        <span class="tag">OpenAI API</span><span class="tag">SSE 流式输出</span><span class="tag">RAG</span>
+        <span class="tag">向量数据库</span><span class="tag">AI Agent</span><span class="tag">LangChain</span>
+        <span class="tag">Prompt Engineering</span>
       </div>
     </div>
-    <div class="skill-group reveal">
+    <div class="skill-group reveal reveal-delay-3">
       <h4><span class="emoji">🚀</span> <span data-i18n="sk_ops">DevOps</span></h4>
       <div class="tags">
-        <span class="tag">Docker</span><span class="tag">Nginx</span>
-        <span class="tag">Linux</span><span class="tag">Git</span>
-        <span class="tag">CI/CD</span><span class="tag">K8s</span>
+        <span class="tag">Docker</span><span class="tag">Nginx</span><span class="tag">Linux</span>
+        <span class="tag">Git</span><span class="tag">Jenkins</span><span class="tag">Maven / Gradle</span>
+        <span class="tag">CI/CD</span>
       </div>
     </div>
   </div>
@@ -466,36 +663,30 @@
   <div class="projects-row">
     <div class="project reveal">
       <div class="project-top">
-        <span class="project-icon">📘</span>
+        <span class="project-icon">📚</span>
         <a href="https://github.com/beiluoL/frontend-interview-guide" target="_blank" class="project-link">GitHub ↗</a>
       </div>
       <h3 data-i18n="p1_title">前端面试要点指南</h3>
       <p data-i18n="p1_desc">面向 Java 开发者的前端全栈进阶指南，18 个章节、3000+ 行，覆盖 JS、React、TS、Next.js、AI 项目实战。</p>
-      <div class="tags">
-        <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Spring AI</span>
-      </div>
+      <div class="tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Next.js</span><span class="tag">AI</span></div>
     </div>
-    <div class="project reveal">
+    <div class="project reveal reveal-delay-1">
       <div class="project-top">
         <span class="project-icon">🤖</span>
-        <a href="https://github.com/beiluoL" target="_blank" class="project-link">GitHub ↗</a>
+        <span class="project-link" data-i18n="p_badge_private">私有项目</span>
       </div>
       <h3 data-i18n="p2_title">AI 智能对话平台</h3>
       <p data-i18n="p2_desc">Spring AI + React 全栈对话系统，SSE 流式输出、多轮对话、Token 计费、对话历史管理。</p>
-      <div class="tags">
-        <span class="tag">Spring Boot</span><span class="tag">Spring AI</span><span class="tag">SSE</span>
-      </div>
+      <div class="tags"><span class="tag">Spring AI</span><span class="tag">React</span><span class="tag">SSE</span><span class="tag">PostgreSQL</span></div>
     </div>
-    <div class="project reveal">
+    <div class="project reveal reveal-delay-2">
       <div class="project-top">
-        <span class="project-icon">📚</span>
-        <a href="https://github.com/beiluoL" target="_blank" class="project-link">GitHub ↗</a>
+        <span class="project-icon">🧠</span>
+        <span class="project-link" data-i18n="p_badge_private">私有项目</span>
       </div>
       <h3 data-i18n="p3_title">RAG 知识库问答</h3>
       <p data-i18n="p3_desc">向量数据库 + 大模型检索增强生成，PDF 解析、智能分块、语义检索，私有知识库精准问答。</p>
-      <div class="tags">
-        <span class="tag">Milvus</span><span class="tag">Embedding</span><span class="tag">RAG</span>
-      </div>
+      <div class="tags"><span class="tag">RAG</span><span class="tag">Milvus</span><span class="tag">Embedding</span><span class="tag">LangChain</span></div>
     </div>
   </div>
 </section>
@@ -513,17 +704,17 @@
       <h4 data-i18n="blog_cnblogs">博客园</h4>
       <p>cnblogs.com/beiluoL</p>
     </a>
-    <a href="https://blog.csdn.net/beiluoL" target="_blank" class="blog-card reveal">
+    <a href="https://blog.csdn.net/beiluoL" target="_blank" class="blog-card reveal reveal-delay-1">
       <div class="blog-icon csdn">📕</div>
       <h4>CSDN</h4>
       <p>blog.csdn.net/beiluoL</p>
     </a>
-    <div class="blog-card reveal">
+    <div class="blog-card reveal reveal-delay-2">
       <div class="blog-icon wechat">💬</div>
       <h4 data-i18n="blog_wechat">公众号 · 北落拾光</h4>
       <p data-i18n="blog_wechat_desc">个人学习公众号，分享全栈与 AI 实战</p>
     </div>
-    <a href="https://gitee.com/beiluol" target="_blank" class="blog-card reveal">
+    <a href="https://gitee.com/beiluol" target="_blank" class="blog-card reveal reveal-delay-3">
       <div class="blog-icon gitee">🔴</div>
       <h4>Gitee</h4>
       <p>gitee.com/beiluol</p>
@@ -547,6 +738,7 @@
       <a href="https://www.cnblogs.com/beiluoL" target="_blank" class="btn btn-ghost" data-i18n="ct_cnblogs">📗 博客园</a>
       <a href="https://blog.csdn.net/beiluoL" target="_blank" class="btn btn-ghost">📕 CSDN</a>
       <a href="https://gitee.com/beiluol" target="_blank" class="btn btn-ghost">🔴 Gitee</a>
+      <a href="https://beiluol.github.io/resume" target="_blank" class="btn btn-ghost" data-i18n="ct_resume">📄 简历</a>
     </div>
   </div>
 </section>
@@ -555,52 +747,73 @@
   <p>© 2025 beiluoL · <span data-i18n="footer">用心写代码，认真生活</span></p>
 </footer>
 
+<!-- Back to Top -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
 <script>
 const T = {
   zh: {
-    nav_about:'关于', nav_skills:'技能', nav_projects:'项目', nav_blogs:'博客', nav_contact:'联系',
+    nav_about:'关于', nav_exp:'经历', nav_skills:'技能', nav_projects:'项目', nav_blogs:'博客', nav_contact:'联系', nav_resume:'📄 在线简历',
     hero_tag:'开放合作 · 持续学习',
     hero_hi:'你好，我是',
     hero_sub:'全栈开发工程师 — 专注 Java 后端与前端技术深度融合，致力于打造高性能、高可用的 Web 应用与 AI 智能产品。',
-    hero_cta1:'浏览项目 →', hero_cta2:'技术博客',
+    hero_cta1:'浏览项目 →', hero_cta3:'📄 查看简历',
+    typeTexts:['System.out.println("Hello World!");', 'const app = new FullStackApp(Java, React);', 'await ai.chat(prompt, { stream: true });', 'docker compose up -d && nginx -s reload'],
     about_label:'关于我', about_title:'热爱代码，享受解决问题', about_desc:'从后端到前端，从传统架构到 AI 应用，不断拓展技术边界',
     about_p1:'我是一名全栈开发工程师，拥有扎实的 Java 后端开发功底，熟悉 Spring Boot / Spring Cloud 微服务架构、分布式系统设计，同时深入掌握 React、TypeScript、Next.js 等现代前端技术栈。',
     about_p2:'近期专注于 AI 全栈应用方向 — 大模型对话系统（SSE 流式输出）、RAG 知识库问答、AI Agent 工作流编排平台，致力于将 AI 能力落地到工程实践中。',
     about_p3:'活跃于技术社区，在博客园、CSDN 持续输出技术文章，同时运营个人学习公众号「北落拾光」，分享全栈开发与 AI 应用实战经验。',
     stat_exp:'年开发经验', stat_proj:'项目经历', stat_oss:'行开源代码',
     code_role:'全栈开发工程师', code_loc:'中国',
+    exp_label:'工作经历', exp_title:'成长之路', exp_desc:'每一步都在积累，每一段都有收获',
+    tl1_date:'2022.06 — 至今', tl1_role:'全栈开发工程师', tl1_company:'某某科技有限公司',
+    tl1_desc:'主导核心业务系统架构设计，基于 Spring Cloud 微服务 + React 前端全栈开发。引入 AI 能力，构建智能客服与知识库问答系统，推动团队工程化与代码规范建设。',
+    tl2_date:'2020.07 — 2022.05', tl2_role:'Java 后端开发工程师', tl2_company:'某某信息技术有限公司',
+    tl2_desc:'负责电商平台后端开发，Spring Boot + MyBatis-Plus。优化数据库性能（响应时间降低 85%），设计异步消息系统（吞吐量提升 3 倍），参与单体到微服务架构迁移。',
+    tl3_date:'2016.09 — 2020.06', tl3_role:'计算机科学与技术 · 本科', tl3_school:'某某大学',
+    tl3_desc:'系统学习计算机基础知识，数据结构、算法、操作系统、网络、数据库。参与 ACM 竞赛，培养扎实的编程功底与逻辑思维能力。',
     skills_label:'技术栈', skills_title:'全栈技术覆盖', skills_desc:'从后端架构到前端交互，从传统开发到 AI 应用',
     sk_be:'后端开发', sk_fe:'前端开发', sk_ai:'AI 应用', sk_ops:'DevOps',
     proj_label:'精选项目', proj_title:'实践成果', proj_desc:'从知识分享到 AI 应用的全栈实践',
     p1_title:'前端面试要点指南', p1_desc:'面向 Java 开发者的前端全栈进阶指南，18 个章节、3000+ 行，覆盖 JS、React、TS、Next.js、AI 项目实战。',
     p2_title:'AI 智能对话平台', p2_desc:'Spring AI + React 全栈对话系统，SSE 流式输出、多轮对话、Token 计费、对话历史管理。',
     p3_title:'RAG 知识库问答', p3_desc:'向量数据库 + 大模型检索增强生成，PDF 解析、智能分块、语义检索，私有知识库精准问答。',
+    p_badge_private:'私有项目',
     blog_label:'技术博客', blog_title:'持续输出，分享成长', blog_desc:'在多个平台记录技术探索与实践心得',
-    blog_cnblogs:'博客园', blog_gitee:'Gitee', blog_wechat:'公众号 · 北落拾光', blog_wechat_desc:'个人学习公众号，分享全栈与 AI 实战',
-    ct_title:'一起构建更好的产品', ct_desc:'技术讨论、项目合作、工作机会 — 随时欢迎联系', ct_cnblogs:'📗 博客园',
+    blog_cnblogs:'博客园', blog_wechat:'公众号 · 北落拾光', blog_wechat_desc:'个人学习公众号，分享全栈与 AI 实战',
+    ct_title:'一起构建更好的产品', ct_desc:'技术讨论、项目合作、工作机会 — 随时欢迎联系', ct_cnblogs:'📗 博客园', ct_resume:'📄 简历',
     footer:'用心写代码，认真生活'
   },
   en: {
-    nav_about:'About', nav_skills:'Skills', nav_projects:'Projects', nav_blogs:'Blog', nav_contact:'Contact',
+    nav_about:'About', nav_exp:'Experience', nav_skills:'Skills', nav_projects:'Projects', nav_blogs:'Blog', nav_contact:'Contact', nav_resume:'📄 Resume',
     hero_tag:'Open to Collaborate · Always Learning',
     hero_hi:"Hi, I'm",
     hero_sub:'Full Stack Developer — Specializing in deep integration of Java backend and modern frontend, building high-performance web apps & AI products.',
-    hero_cta1:'View Projects →', hero_cta2:'Tech Blog',
+    hero_cta1:'View Projects →', hero_cta3:'📄 View Resume',
+    typeTexts:['System.out.println("Hello World!");', 'const app = new FullStackApp(Java, React);', 'await ai.chat(prompt, { stream: true });', 'docker compose up -d && nginx -s reload'],
     about_label:'About', about_title:'Love coding, enjoy problem solving', about_desc:'Expanding tech boundaries from backend to frontend, from traditional architecture to AI',
     about_p1:"I'm a full stack developer with solid Java backend expertise — Spring Boot / Spring Cloud microservices, distributed systems — combined with deep proficiency in React, TypeScript, Next.js and modern frontend stacks.",
     about_p2:'Currently focused on AI full-stack applications — LLM chat systems (SSE streaming), RAG knowledge base Q&A, AI Agent workflow orchestration platforms — bringing AI capabilities into engineering practice.',
     about_p3:"Active in tech communities, publishing articles on CNBlogs and CSDN, while running a personal WeChat Official Account '北落拾光' sharing full-stack and AI development insights.",
     stat_exp:'Years Experience', stat_proj:'Projects', stat_oss:'Lines OSS Code',
     code_role:'Full Stack Developer', code_loc:'China',
+    exp_label:'Experience', exp_title:'Growth Journey', exp_desc:'Every step counts, every chapter matters',
+    tl1_date:'Jun 2022 — Present', tl1_role:'Full Stack Developer', tl1_company:'XX Technology Co., Ltd.',
+    tl1_desc:'Led core system architecture with Spring Cloud microservices + React frontend. Introduced AI capabilities — intelligent customer service and knowledge base Q&A. Drove team engineering practices and code quality standards.',
+    tl2_date:'Jul 2020 — May 2022', tl2_role:'Java Backend Developer', tl2_company:'XX Information Technology Co., Ltd.',
+    tl2_desc:'E-commerce platform backend with Spring Boot + MyBatis-Plus. Optimized DB performance (85% response time reduction), designed async messaging (3x throughput), participated in monolith-to-microservices migration.',
+    tl3_date:'Sep 2016 — Jun 2020', tl3_role:'Computer Science · Bachelor', tl3_school:'XX University',
+    tl3_desc:'Systematic CS education — data structures, algorithms, OS, networks, databases. ACM competition experience, building solid programming and logical thinking skills.',
     skills_label:'Tech Stack', skills_title:'Full-stack Coverage', skills_desc:'From backend architecture to frontend interaction, from traditional dev to AI apps',
     sk_be:'Backend', sk_fe:'Frontend', sk_ai:'AI Apps', sk_ops:'DevOps',
     proj_label:'Featured', proj_title:'Practice & Results', proj_desc:'Full-stack practice from knowledge sharing to AI applications',
     p1_title:'Frontend Interview Guide', p1_desc:'Comprehensive frontend guide for Java devs — 18 chapters, 3000+ lines covering JS, React, TS, Next.js, and AI project practices.',
     p2_title:'AI Chat Platform', p2_desc:'Full-stack chat system with Spring AI + React — SSE streaming, multi-turn conversations, token tracking, history management.',
     p3_title:'RAG Knowledge Base Q&A', p3_desc:'Vector DB + LLM retrieval-augmented generation — PDF parsing, smart chunking, semantic search for private knowledge Q&A.',
+    p_badge_private:'Private',
     blog_label:'Tech Blog', blog_title:'Continuous Output & Sharing', blog_desc:'Documenting tech exploration and practice across platforms',
-    blog_cnblogs:'CNBlogs', blog_gitee:'Gitee', blog_wechat:'WeChat · 北落拾光', blog_wechat_desc:'Personal account sharing full-stack & AI insights',
-    ct_title:"Let's Build Something Great", ct_desc:'Tech discussions, project collaboration, job opportunities — feel free to reach out', ct_cnblogs:'📗 CNBlogs',
+    blog_cnblogs:'CNBlogs', blog_wechat:'WeChat · 北落拾光', blog_wechat_desc:'Personal account sharing full-stack & AI insights',
+    ct_title:"Let's Build Something Great", ct_desc:'Tech discussions, project collaboration, job opportunities — feel free to reach out', ct_cnblogs:'📗 CNBlogs', ct_resume:'📄 Resume',
     footer:'Code with heart, live with purpose'
   }
 };
@@ -618,11 +831,113 @@ function setLang(l) {
     if (T[l][k]) el.textContent = T[l][k];
   });
   localStorage.setItem('lang', l);
+  // Restart typewriter with new language
+  startTypewriter();
 }
 
 setLang(lang);
 
-// Scroll reveal
+// === Scroll Progress ===
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('scrollProgress').style.width = pct + '%';
+});
+
+// === Nav scroll effect ===
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// === Active nav link ===
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 200) current = s.id;
+  });
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+});
+
+// === Back to top ===
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('show', window.scrollY > 600);
+});
+
+// === Mobile menu ===
+function toggleMenu() {
+  document.getElementById('menuToggle').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('show');
+}
+function closeMenu() {
+  document.getElementById('menuToggle').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('show');
+}
+
+// === Typewriter ===
+let typeTimer = null;
+function startTypewriter() {
+  if (typeTimer) clearInterval(typeTimer);
+  const el = document.getElementById('typewriter');
+  const texts = T[lang].typeTexts;
+  let ti = 0, ci = 0, deleting = false;
+
+  function tick() {
+    const txt = texts[ti];
+    if (!deleting) {
+      el.innerHTML = txt.slice(0, ci + 1) + '<span class="cursor"></span>';
+      ci++;
+      if (ci >= txt.length) {
+        deleting = true;
+        typeTimer = setTimeout(tick, 2000);
+        return;
+      }
+      typeTimer = setTimeout(tick, 60 + Math.random() * 40);
+    } else {
+      el.innerHTML = txt.slice(0, ci) + '<span class="cursor"></span>';
+      ci--;
+      if (ci < 0) {
+        deleting = false;
+        ti = (ti + 1) % texts.length;
+        ci = 0;
+        typeTimer = setTimeout(tick, 500);
+        return;
+      }
+      typeTimer = setTimeout(tick, 30);
+    }
+  }
+  tick();
+}
+startTypewriter();
+
+// === Counter Animation ===
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.dataset.count);
+      const suffix = target >= 1000 ? '+' : '+';
+      let current = 0;
+      const step = Math.max(1, Math.floor(target / 60));
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        el.textContent = current >= 1000 ? current.toLocaleString() + '+' : current + '+';
+      }, 30);
+      counterObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
+
+// === Scroll reveal ===
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
 }, { threshold: 0.08 });
