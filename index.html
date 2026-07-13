@@ -3,560 +3,624 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>beiluoL | Full Stack Developer</title>
+  <title>beiluoL | 全栈开发工程师</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #12121a;
-      --bg-card: #1a1a2e;
-      --text-primary: #e4e4e7;
-      --text-secondary: #a1a1aa;
-      --accent: #6366f1;
-      --accent-light: #818cf8;
-      --accent-glow: rgba(99, 102, 241, 0.15);
+      --bg: #09090b;
+      --bg-card: #18181b;
+      --bg-card-hover: #1f1f23;
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      --accent: #8b5cf6;
+      --accent-2: #6366f1;
+      --accent-3: #06b6d4;
+      --green: #22c55e;
       --border: #27272a;
-      --gradient-1: linear-gradient(135deg, #6366f1, #8b5cf6);
-      --gradient-2: linear-gradient(135deg, #06b6d4, #6366f1);
+      --border-light: #3f3f46;
       --radius: 16px;
-      --shadow: 0 4px 24px rgba(0,0,0,0.3);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
+      font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.7;
       overflow-x: hidden;
     }
 
-    /* Navigation */
+    /* === Ambient Background === */
+    .ambient {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+    }
+    .ambient .orb {
+      position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.12;
+    }
+    .ambient .orb-1 { width: 600px; height: 600px; background: #8b5cf6; top: -10%; right: -5%; }
+    .ambient .orb-2 { width: 500px; height: 500px; background: #06b6d4; bottom: 10%; left: -10%; }
+    .ambient .orb-3 { width: 400px; height: 400px; background: #6366f1; top: 50%; right: 30%; }
+
+    /* === Navigation === */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 16px 32px;
-      background: rgba(10, 10, 15, 0.8);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 40px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(9, 9, 11, 0.7);
+      backdrop-filter: blur(24px) saturate(1.4);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
-    .nav-logo {
-      font-size: 1.25rem; font-weight: 700;
-      background: var(--gradient-1); -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .logo {
+      font-size: 1.3rem; font-weight: 800; letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #c084fc, #818cf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
 
-    .nav-links { display: flex; gap: 24px; align-items: center; }
-    .nav-links a {
-      color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover { color: var(--text-primary); }
+    .nav-right { display: flex; align-items: center; gap: 8px; }
 
-    .lang-toggle {
-      display: flex; background: var(--bg-card); border-radius: 8px;
-      overflow: hidden; border: 1px solid var(--border);
+    .nav-link {
+      padding: 7px 16px; border-radius: 8px; font-size: 0.875rem;
+      color: var(--text-muted); text-decoration: none; transition: all 0.2s;
+    }
+    .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+
+    .lang-switch {
+      display: flex; margin-left: 12px;
+      background: rgba(255,255,255,0.06); border-radius: 8px; padding: 3px;
     }
     .lang-btn {
-      padding: 6px 14px; font-size: 0.8rem; cursor: pointer;
-      background: transparent; border: none; color: var(--text-secondary);
-      transition: all 0.3s; font-family: inherit;
+      padding: 5px 14px; border-radius: 6px; font-size: 0.8rem;
+      border: none; cursor: pointer; font-family: inherit;
+      background: transparent; color: var(--text-dim); transition: all 0.25s;
     }
     .lang-btn.active {
       background: var(--accent); color: white;
+      box-shadow: 0 2px 8px rgba(139,92,246,0.4);
     }
 
-    /* Hero Section */
+    /* === Hero === */
     .hero {
       min-height: 100vh; display: flex; align-items: center;
-      padding: 120px 32px 80px;
-      max-width: 1200px; margin: 0 auto;
+      padding: 100px 40px 80px; max-width: 1100px; margin: 0 auto;
+    }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 100px; margin-bottom: 28px;
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      color: var(--green); font-size: 0.85rem; font-weight: 500;
+    }
+    .hero-tag .pulse {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.85); } }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 800;
+      line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px;
+    }
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, #c084fc 0%, #818cf8 50%, #38bdf8 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1.2rem; color: var(--text-muted); max-width: 580px;
+      margin-bottom: 36px; font-weight: 300;
+    }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 12px; font-size: 0.95rem;
+      font-weight: 600; text-decoration: none; cursor: pointer;
+      border: none; font-family: inherit; transition: all 0.25s;
+    }
+    .btn-glow {
+      background: linear-gradient(135deg, #8b5cf6, #6366f1); color: white;
+      box-shadow: 0 4px 24px rgba(139,92,246,0.35);
+    }
+    .btn-glow:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(139,92,246,0.5); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.05); color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--accent); background: rgba(139,92,246,0.08); }
+
+    /* === Sections === */
+    section { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+
+    .sec-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--accent); margin-bottom: 12px;
+    }
+    .sec-label::before {
+      content: ''; width: 24px; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .sec-title {
+      font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px;
+    }
+    .sec-desc { color: var(--text-muted); font-size: 1rem; margin-bottom: 48px; }
+
+    /* === About === */
+    .about-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; }
+
+    .about-text p { color: var(--text-muted); margin-bottom: 16px; font-size: 1rem; }
+
+    .stats-row {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px;
+    }
+    .stat {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px; text-align: center;
+    }
+    .stat .num {
+      font-size: 2rem; font-weight: 800;
+      background: linear-gradient(135deg, #c084fc, #818cf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat .txt { font-size: 0.78rem; color: var(--text-dim); margin-top: 4px; }
+
+    /* Code block decoration */
+    .code-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .code-header {
+      padding: 12px 18px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .code-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .code-body {
+      padding: 20px; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem; line-height: 1.9; color: var(--text-muted);
+    }
+    .code-body .kw { color: #c084fc; }
+    .code-body .str { color: #22c55e; }
+    .code-body .fn { color: #38bdf8; }
+    .code-body .cm { color: #52525b; }
+    .code-body .num { color: #f59e0b; }
+
+    /* === Skills === */
+    .skills-row {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;
+    }
+    .skill-group {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px; transition: all 0.3s;
+    }
+    .skill-group:hover {
+      border-color: var(--accent);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+    }
+    .skill-group h4 {
+      font-size: 0.95rem; font-weight: 600; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .skill-group h4 .emoji { font-size: 1.3rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag {
+      padding: 4px 12px; border-radius: 7px; font-size: 0.78rem;
+      background: rgba(255,255,255,0.04); color: var(--text-muted);
+      border: 1px solid var(--border); transition: all 0.2s;
+    }
+    .skill-group:hover .tag { border-color: var(--border-light); }
+
+    /* === Projects === */
+    .projects-row {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;
+    }
+    .project {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px; transition: all 0.3s;
+      display: flex; flex-direction: column;
+    }
+    .project:hover {
+      border-color: var(--accent); transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .project-top { display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px; }
+    .project-icon { font-size: 2.2rem; }
+    .project-link {
+      color: var(--text-dim); text-decoration: none; font-size: 0.85rem;
+      padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .project-link:hover { color: var(--accent); border-color: var(--accent); }
+    .project h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .project p { color: var(--text-muted); font-size: 0.88rem; flex: 1; margin-bottom: 18px; }
+    .project .tags { margin-top: auto; }
+    .project .tag { background: rgba(139,92,246,0.1); color: var(--accent); border-color: rgba(139,92,246,0.2); }
+
+    /* === Blog Links === */
+    .blogs-row {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;
+    }
+    .blog-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      text-decoration: none; color: var(--text); transition: all 0.3s;
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
+    }
+    .blog-card:hover {
+      border-color: var(--accent); transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .blog-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .blog-card h4 { font-size: 1rem; font-weight: 600; }
+    .blog-card p { font-size: 0.82rem; color: var(--text-dim); }
+    .blog-icon.cnblogs { background: rgba(46, 139, 87, 0.15); }
+    .blog-icon.csdn { background: rgba(220, 38, 38, 0.12); }
+    .blog-icon.wechat { background: rgba(34, 197, 94, 0.12); }
+    .blog-icon.github { background: rgba(255,255,255,0.06); }
+
+    /* === Contact === */
+    .contact-box {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 56px 40px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .contact-box::before {
+      content: ''; position: absolute; top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at 30% 40%, rgba(139,92,246,0.06) 0%, transparent 50%);
+    }
+    .contact-box h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; position: relative; }
+    .contact-box p { color: var(--text-muted); margin-bottom: 32px; position: relative; }
+    .contact-btns {
+      display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
       position: relative;
     }
 
-    .hero::before {
-      content: ''; position: absolute; top: 20%; right: -10%;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-      border-radius: 50%; filter: blur(80px); pointer-events: none;
-    }
-
-    .hero-content { flex: 1; }
-
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 16px; border-radius: 20px;
-      background: var(--accent-glow); border: 1px solid rgba(99,102,241,0.3);
-      color: var(--accent-light); font-size: 0.85rem; margin-bottom: 24px;
-    }
-    .hero-badge .dot {
-      width: 8px; height: 8px; border-radius: 50%; background: #22c55e;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
-    }
-
-    .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700;
-      line-height: 1.2; margin-bottom: 16px;
-    }
-    .hero h1 .gradient {
-      background: var(--gradient-1); -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-desc {
-      font-size: 1.15rem; color: var(--text-secondary);
-      max-width: 560px; margin-bottom: 32px;
-    }
-
-    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn {
-      padding: 12px 28px; border-radius: 10px; font-size: 0.95rem;
-      text-decoration: none; font-weight: 500; transition: all 0.3s;
-      display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;
-      font-family: inherit;
-    }
-    .btn-primary {
-      background: var(--gradient-1); color: white;
-      box-shadow: 0 4px 20px rgba(99,102,241,0.4);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(99,102,241,0.5); }
-    .btn-secondary {
-      background: transparent; color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent-light); }
-
-    /* Section Common */
-    section { padding: 80px 32px; max-width: 1200px; margin: 0 auto; }
-
-    .section-header {
-      text-align: center; margin-bottom: 56px;
-    }
-    .section-header h2 {
-      font-size: 2rem; font-weight: 700; margin-bottom: 12px;
-    }
-    .section-header p { color: var(--text-secondary); font-size: 1rem; }
-
-    /* About Section */
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
-      align-items: center;
-    }
-    .about-text p { color: var(--text-secondary); margin-bottom: 16px; font-size: 1rem; }
-    .about-stats {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px;
-    }
-    .stat-card {
-      background: var(--bg-card); border-radius: var(--radius); padding: 20px;
-      text-align: center; border: 1px solid var(--border);
-    }
-    .stat-card .number {
-      font-size: 1.8rem; font-weight: 700;
-      background: var(--gradient-1); -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .stat-card .label { font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
-
-    /* Skills Section */
-    .skills-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;
-    }
-    .skill-card {
-      background: var(--bg-card); border-radius: var(--radius); padding: 28px;
-      border: 1px solid var(--border); transition: all 0.3s;
-    }
-    .skill-card:hover {
-      border-color: var(--accent); transform: translateY(-4px);
-      box-shadow: 0 8px 32px rgba(99,102,241,0.15);
-    }
-    .skill-card h3 {
-      font-size: 1.1rem; margin-bottom: 16px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .skill-card h3 .icon { font-size: 1.4rem; }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .skill-tag {
-      padding: 4px 12px; border-radius: 6px; font-size: 0.8rem;
-      background: var(--bg-secondary); color: var(--text-secondary);
-      border: 1px solid var(--border);
-    }
-
-    /* Projects Section */
-    .projects-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;
-    }
-    .project-card {
-      background: var(--bg-card); border-radius: var(--radius);
-      border: 1px solid var(--border); overflow: hidden; transition: all 0.3s;
-    }
-    .project-card:hover {
-      border-color: var(--accent); transform: translateY(-4px);
-      box-shadow: var(--shadow);
-    }
-    .project-header {
-      padding: 24px 24px 0;
-      display: flex; justify-content: space-between; align-items: start;
-    }
-    .project-header .icon { font-size: 2rem; }
-    .project-links a {
-      color: var(--text-secondary); text-decoration: none; margin-left: 12px;
-      transition: color 0.3s; font-size: 0.9rem;
-    }
-    .project-links a:hover { color: var(--accent-light); }
-    .project-body { padding: 16px 24px 24px; }
-    .project-body h3 { font-size: 1.15rem; margin-bottom: 8px; }
-    .project-body p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px; }
-    .project-tech { display: flex; flex-wrap: wrap; gap: 6px; }
-    .project-tech span {
-      padding: 3px 10px; border-radius: 4px; font-size: 0.75rem;
-      background: var(--accent-glow); color: var(--accent-light);
-    }
-
-    /* Contact Section */
-    .contact-content { text-align: center; max-width: 600px; margin: 0 auto; }
-    .contact-content p { color: var(--text-secondary); margin-bottom: 32px; }
-    .contact-links {
-      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
-    }
-    .contact-link {
-      display: flex; align-items: center; gap: 10px;
-      padding: 14px 24px; border-radius: 12px;
-      background: var(--bg-card); border: 1px solid var(--border);
-      color: var(--text-primary); text-decoration: none;
-      transition: all 0.3s; font-size: 0.95rem;
-    }
-    .contact-link:hover {
-      border-color: var(--accent); transform: translateY(-2px);
-    }
-
-    /* Footer */
+    /* === Footer === */
     footer {
-      text-align: center; padding: 32px; color: var(--text-secondary);
-      font-size: 0.85rem; border-top: 1px solid var(--border);
+      text-align: center; padding: 40px; color: var(--text-dim);
+      font-size: 0.82rem; border-top: 1px solid var(--border);
     }
 
-    /* Animations */
-    .fade-in {
-      opacity: 0; transform: translateY(20px);
-      transition: opacity 0.6s, transform 0.6s;
+    /* === Animations === */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
     }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .reveal.show { opacity: 1; transform: translateY(0); }
 
-    /* Responsive */
+    /* === Responsive === */
     @media (max-width: 768px) {
-      nav { padding: 12px 16px; }
-      .nav-links a:not(.lang-toggle-wrapper) { display: none; }
-      .hero { padding: 100px 16px 60px; }
-      .about-grid { grid-template-columns: 1fr; }
-      .projects-grid { grid-template-columns: 1fr; }
-      section { padding: 60px 16px; }
+      nav { padding: 0 16px; }
+      .nav-link { display: none; }
+      .hero { padding: 100px 20px 60px; }
+      section { padding: 60px 20px; }
+      .about-layout { grid-template-columns: 1fr; gap: 32px; }
+      .projects-row { grid-template-columns: 1fr; }
+      .contact-box { padding: 40px 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav>
-    <div class="nav-logo">beiluoL</div>
-    <div class="nav-links">
-      <a href="#about" data-i18n="nav_about">关于</a>
-      <a href="#skills" data-i18n="nav_skills">技能</a>
-      <a href="#projects" data-i18n="nav_projects">项目</a>
-      <a href="#contact" data-i18n="nav_contact">联系</a>
-      <div class="lang-toggle">
-        <button class="lang-btn active" onclick="setLang('zh')">中文</button>
-        <button class="lang-btn" onclick="setLang('en')">EN</button>
-      </div>
-    </div>
-  </nav>
+<div class="ambient">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        <span data-i18n="hero_badge">开放合作中</span>
-      </div>
-      <h1>
-        <span data-i18n="hero_greeting">你好，我是</span><br>
-        <span class="gradient">beiluoL</span>
-      </h1>
-      <p class="hero-desc" data-i18n="hero_desc">
-        全栈开发工程师，专注于 Java 后端与前端技术的深度融合，致力于打造高性能、高可用的 Web 应用。
-      </p>
-      <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary" data-i18n="hero_btn_projects">查看项目 →</a>
-        <a href="#contact" class="btn btn-secondary" data-i18n="hero_btn_contact">联系我</a>
-      </div>
+<!-- Nav -->
+<nav>
+  <div class="logo">beiluoL</div>
+  <div class="nav-right">
+    <a href="#about" class="nav-link" data-i18n="nav_about">关于</a>
+    <a href="#skills" class="nav-link" data-i18n="nav_skills">技能</a>
+    <a href="#projects" class="nav-link" data-i18n="nav_projects">项目</a>
+    <a href="#blogs" class="nav-link" data-i18n="nav_blogs">博客</a>
+    <a href="#contact" class="nav-link" data-i18n="nav_contact">联系</a>
+    <div class="lang-switch">
+      <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
-  </section>
+  </div>
+</nav>
 
-  <!-- About -->
-  <section id="about">
-    <div class="section-header fade-in">
-      <h2 data-i18n="about_title">关于我</h2>
-      <p data-i18n="about_subtitle">热爱技术，持续学习</p>
+<!-- Hero -->
+<section class="hero">
+  <div>
+    <div class="hero-tag">
+      <span class="pulse"></span>
+      <span data-i18n="hero_tag">开放合作 · 持续学习</span>
     </div>
-    <div class="about-grid">
-      <div class="about-text fade-in">
-        <p data-i18n="about_p1">
-          我是一名全栈开发工程师，拥有丰富的 Java 后端开发经验，同时深入掌握前端技术栈。熟悉 Spring Boot / Spring Cloud 微服务架构，能够独立完成从数据库设计到前端交互的完整开发流程。
-        </p>
-        <p data-i18n="about_p2">
-          近期专注于 AI 全栈应用开发，包括大模型对话系统、RAG 知识库问答、AI Agent 工作流编排等前沿方向，致力于将 AI 能力与工程实践相结合。
-        </p>
-      </div>
-      <div class="about-stats fade-in">
-        <div class="stat-card">
-          <div class="number">3+</div>
-          <div class="label" data-i18n="stat_years">年开发经验</div>
-        </div>
-        <div class="stat-card">
-          <div class="number">10+</div>
-          <div class="label" data-i18n="stat_projects">项目经验</div>
-        </div>
-        <div class="stat-card">
-          <div class="number">3000+</div>
-          <div class="label" data-i18n="stat_lines">行开源代码</div>
-        </div>
-      </div>
+    <h1>
+      <span data-i18n="hero_hi">你好，我是</span><br>
+      <span class="gradient-text">beiluoL</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero_sub">
+      全栈开发工程师 — 专注 Java 后端与前端技术深度融合，致力于打造高性能、高可用的 Web 应用与 AI 智能产品。
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-glow" data-i18n="hero_cta1">浏览项目 →</a>
+      <a href="#blogs" class="btn btn-ghost" data-i18n="hero_cta2">技术博客</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Skills -->
-  <section id="skills">
-    <div class="section-header fade-in">
-      <h2 data-i18n="skills_title">技术栈</h2>
-      <p data-i18n="skills_subtitle">前后端全栈技术覆盖</p>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-card fade-in">
-        <h3><span class="icon">⚙️</span> <span data-i18n="skill_backend">后端开发</span></h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Java</span>
-          <span class="skill-tag">Spring Boot</span>
-          <span class="skill-tag">Spring Cloud</span>
-          <span class="skill-tag">MyBatis</span>
-          <span class="skill-tag">MySQL</span>
-          <span class="skill-tag">Redis</span>
-          <span class="skill-tag">Kafka</span>
-        </div>
+<!-- About -->
+<section id="about">
+  <div class="reveal">
+    <div class="sec-label" data-i18n="about_label">关于我</div>
+    <div class="sec-title" data-i18n="about_title">热爱代码，享受解决问题</div>
+    <div class="sec-desc" data-i18n="about_desc">从后端到前端，从传统架构到 AI 应用，不断拓展技术边界</div>
+  </div>
+  <div class="about-layout">
+    <div class="reveal">
+      <div class="about-text">
+        <p data-i18n="about_p1">我是一名全栈开发工程师，拥有扎实的 Java 后端开发功底，熟悉 Spring Boot / Spring Cloud 微服务架构、分布式系统设计，同时深入掌握 React、TypeScript、Next.js 等现代前端技术栈。</p>
+        <p data-i18n="about_p2">近期专注于 AI 全栈应用方向 — 大模型对话系统（SSE 流式输出）、RAG 知识库问答、AI Agent 工作流编排平台，致力于将 AI 能力落地到工程实践中。</p>
+        <p data-i18n="about_p3">活跃于技术社区，在博客园、CSDN 持续输出技术文章，同时运营个人学习公众号「北落拾光」，分享全栈开发与 AI 应用实战经验。</p>
       </div>
-      <div class="skill-card fade-in">
-        <h3><span class="icon">🎨</span> <span data-i18n="skill_frontend">前端开发</span></h3>
-        <div class="skill-tags">
-          <span class="skill-tag">React</span>
-          <span class="skill-tag">TypeScript</span>
-          <span class="skill-tag">Next.js</span>
-          <span class="skill-tag">Vue 3</span>
-          <span class="skill-tag">Tailwind CSS</span>
-          <span class="skill-tag">Vite</span>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="num">3+</div>
+          <div class="txt" data-i18n="stat_exp">年开发经验</div>
         </div>
-      </div>
-      <div class="skill-card fade-in">
-        <h3><span class="icon">🤖</span> <span data-i18n="skill_ai">AI 应用</span></h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Spring AI</span>
-          <span class="skill-tag">OpenAI API</span>
-          <span class="skill-tag">RAG</span>
-          <span class="skill-tag">LangChain4j</span>
-          <span class="skill-tag">Vector DB</span>
-          <span class="skill-tag">Agent</span>
+        <div class="stat">
+          <div class="num">10+</div>
+          <div class="txt" data-i18n="stat_proj">项目经历</div>
         </div>
-      </div>
-      <div class="skill-card fade-in">
-        <h3><span class="icon">🚀</span> <span data-i18n="skill_devops">DevOps & 工具</span></h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Docker</span>
-          <span class="skill-tag">Nginx</span>
-          <span class="skill-tag">Linux</span>
-          <span class="skill-tag">Git</span>
-          <span class="skill-tag">CI/CD</span>
-          <span class="skill-tag">Kubernetes</span>
+        <div class="stat">
+          <div class="num">3000+</div>
+          <div class="txt" data-i18n="stat_oss">行开源代码</div>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects">
-    <div class="section-header fade-in">
-      <h2 data-i18n="projects_title">精选项目</h2>
-      <p data-i18n="projects_subtitle">开源贡献与实践成果</p>
-    </div>
-    <div class="projects-grid">
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <span class="icon">📘</span>
-          <div class="project-links">
-            <a href="https://github.com/beiluoL/frontend-interview-guide" target="_blank">GitHub ↗</a>
-          </div>
-        </div>
-        <div class="project-body">
-          <h3 data-i18n="proj1_title">前端面试要点指南</h3>
-          <p data-i18n="proj1_desc">面向 Java 开发者的前端全栈进阶指南，涵盖 18 个章节、3000+ 行内容，从 HTML/CSS 到 React、TypeScript、Next.js、AI 项目实战。</p>
-          <div class="project-tech">
-            <span>Markdown</span><span>React</span><span>TypeScript</span><span>Spring AI</span>
-          </div>
-        </div>
+    <div class="code-card reveal">
+      <div class="code-header">
+        <span class="code-dot" style="background:#ef4444"></span>
+        <span class="code-dot" style="background:#f59e0b"></span>
+        <span class="code-dot" style="background:#22c55e"></span>
+        <span style="margin-left:auto;font-size:0.78rem;color:var(--text-dim)">about.ts</span>
       </div>
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <span class="icon">🤖</span>
-          <div class="project-links">
-            <a href="https://github.com/beiluoL" target="_blank">GitHub ↗</a>
-          </div>
-        </div>
-        <div class="project-body">
-          <h3 data-i18n="proj2_title">AI 智能对话平台</h3>
-          <p data-i18n="proj2_desc">基于 Spring AI + React 的全栈 AI 对话系统，支持 SSE 流式输出、多轮对话、对话历史管理、Token 计费统计。</p>
-          <div class="project-tech">
-            <span>Spring Boot</span><span>Spring AI</span><span>React</span><span>SSE</span>
-          </div>
-        </div>
-      </div>
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <span class="icon">📚</span>
-          <div class="project-links">
-            <a href="https://github.com/beiluoL" target="_blank">GitHub ↗</a>
-          </div>
-        </div>
-        <div class="project-body">
-          <h3 data-i18n="proj3_title">RAG 知识库问答系统</h3>
-          <p data-i18n="proj3_desc">基于向量数据库的检索增强生成系统，支持 PDF 文档解析、智能分块、语义检索，让大模型基于私有知识库回答问题。</p>
-          <div class="project-tech">
-            <span>Milvus</span><span>Spring AI</span><span>Embedding</span><span>React</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
-    <div class="section-header fade-in">
-      <h2 data-i18n="contact_title">联系方式</h2>
-      <p data-i18n="contact_subtitle">期待与你交流合作</p>
-    </div>
-    <div class="contact-content fade-in">
-      <p data-i18n="contact_desc">无论是技术讨论、项目合作还是工作机会，都欢迎随时联系我。</p>
-      <div class="contact-links">
-        <a href="mailto:710980260@qq.com" class="contact-link">
-          <span>📧</span>
-          <span>710980260@qq.com</span>
-        </a>
-        <a href="https://github.com/beiluoL" target="_blank" class="contact-link">
-          <span>💻</span>
-          <span>GitHub</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p data-i18n="footer">© 2025 beiluoL. All rights reserved.</p>
-  </footer>
-
-  <script>
-    // i18n translations
-    const translations = {
-      zh: {
-        nav_about: '关于', nav_skills: '技能', nav_projects: '项目', nav_contact: '联系',
-        hero_badge: '开放合作中',
-        hero_greeting: '你好，我是',
-        hero_desc: '全栈开发工程师，专注于 Java 后端与前端技术的深度融合，致力于打造高性能、高可用的 Web 应用。',
-        hero_btn_projects: '查看项目 →', hero_btn_contact: '联系我',
-        about_title: '关于我', about_subtitle: '热爱技术，持续学习',
-        about_p1: '我是一名全栈开发工程师，拥有丰富的 Java 后端开发经验，同时深入掌握前端技术栈。熟悉 Spring Boot / Spring Cloud 微服务架构，能够独立完成从数据库设计到前端交互的完整开发流程。',
-        about_p2: '近期专注于 AI 全栈应用开发，包括大模型对话系统、RAG 知识库问答、AI Agent 工作流编排等前沿方向，致力于将 AI 能力与工程实践相结合。',
-        stat_years: '年开发经验', stat_projects: '项目经验', stat_lines: '行开源代码',
-        skills_title: '技术栈', skills_subtitle: '前后端全栈技术覆盖',
-        skill_backend: '后端开发', skill_frontend: '前端开发', skill_ai: 'AI 应用', skill_devops: 'DevOps & 工具',
-        projects_title: '精选项目', projects_subtitle: '开源贡献与实践成果',
-        proj1_title: '前端面试要点指南',
-        proj1_desc: '面向 Java 开发者的前端全栈进阶指南，涵盖 18 个章节、3000+ 行内容，从 HTML/CSS 到 React、TypeScript、Next.js、AI 项目实战。',
-        proj2_title: 'AI 智能对话平台',
-        proj2_desc: '基于 Spring AI + React 的全栈 AI 对话系统，支持 SSE 流式输出、多轮对话、对话历史管理、Token 计费统计。',
-        proj3_title: 'RAG 知识库问答系统',
-        proj3_desc: '基于向量数据库的检索增强生成系统，支持 PDF 文档解析、智能分块、语义检索，让大模型基于私有知识库回答问题。',
-        contact_title: '联系方式', contact_subtitle: '期待与你交流合作',
-        contact_desc: '无论是技术讨论、项目合作还是工作机会，都欢迎随时联系我。',
-        footer: '© 2025 beiluoL. All rights reserved.'
-      },
-      en: {
-        nav_about: 'About', nav_skills: 'Skills', nav_projects: 'Projects', nav_contact: 'Contact',
-        hero_badge: 'Open to Collaborate',
-        hero_greeting: "Hi, I'm",
-        hero_desc: 'Full Stack Developer specializing in the integration of Java backend and modern frontend technologies, building high-performance and scalable web applications.',
-        hero_btn_projects: 'View Projects →', hero_btn_contact: 'Contact Me',
-        about_title: 'About Me', about_subtitle: 'Passionate about technology, always learning',
-        about_p1: "I'm a full stack developer with extensive experience in Java backend development and deep proficiency in modern frontend technologies. Familiar with Spring Boot / Spring Cloud microservices architecture, capable of independently handling the complete development lifecycle from database design to frontend interaction.",
-        about_p2: 'Currently focusing on AI full-stack application development, including LLM chat systems, RAG knowledge base Q&A, and AI Agent workflow orchestration, combining AI capabilities with engineering best practices.',
-        stat_years: 'Years Experience', stat_projects: 'Projects', stat_lines: 'Lines of OSS Code',
-        skills_title: 'Tech Stack', skills_subtitle: 'Full-stack technology coverage',
-        skill_backend: 'Backend', skill_frontend: 'Frontend', skill_ai: 'AI Applications', skill_devops: 'DevOps & Tools',
-        projects_title: 'Featured Projects', projects_subtitle: 'Open source contributions & practices',
-        proj1_title: 'Frontend Interview Guide',
-        proj1_desc: 'A comprehensive frontend guide for Java developers, covering 18 chapters and 3000+ lines — from HTML/CSS to React, TypeScript, Next.js, and AI project practices.',
-        proj2_title: 'AI Chat Platform',
-        proj2_desc: 'Full-stack AI chat system built with Spring AI + React, featuring SSE streaming, multi-turn conversations, history management, and token usage tracking.',
-        proj3_title: 'RAG Knowledge Base Q&A',
-        proj3_desc: 'Retrieval-Augmented Generation system with vector database, supporting PDF parsing, smart chunking, and semantic search for private knowledge base Q&A.',
-        contact_title: 'Contact', contact_subtitle: 'Looking forward to connecting',
-        contact_desc: 'Whether for tech discussions, project collaboration, or job opportunities — feel free to reach out anytime.',
-        footer: '© 2025 beiluoL. All rights reserved.'
-      }
-    };
-
-    let currentLang = 'zh';
-
-    function setLang(lang) {
-      currentLang = lang;
-      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-
-      // Update toggle buttons
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', (lang === 'zh' && btn.textContent === '中文') || (lang === 'en' && btn.textContent === 'EN'));
-      });
-
-      // Update all i18n elements
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[lang][key]) {
-          el.textContent = translations[lang][key];
+      <div class="code-body">
+        <span class="kw">const</span> <span class="fn">developer</span> = {<br>
+        &nbsp;&nbsp;name: <span class="str">'beiluoL'</span>,<br>
+        &nbsp;&nbsp;role: <span class="str" data-i18n="code_role">'全栈开发工程师'</span>,<br>
+        &nbsp;&nbsp;location: <span class="str" data-i18n="code_loc">'中国'</span>,<br>
+        &nbsp;&nbsp;stack: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;backend: [<span class="str">'Java'</span>, <span class="str">'Spring'</span>, <span class="str">'MySQL'</span>],<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;frontend: [<span class="str">'React'</span>, <span class="str">'TS'</span>, <span class="str">'Next.js'</span>],<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;ai: [<span class="str">'Spring AI'</span>, <span class="str">'RAG'</span>, <span class="str">'Agent'</span>],<br>
+        &nbsp;&nbsp;},<br>
+        &nbsp;&nbsp;blog: <span class="str">'北落拾光'</span>,<br>
+        &nbsp;&nbsp;<span class="fn">available</span>: <span class="num">true</span><br>
         }
-      });
+      </div>
+    </div>
+  </div>
+</section>
 
-      // Save preference
-      localStorage.setItem('lang', lang);
-    }
+<!-- Skills -->
+<section id="skills">
+  <div class="reveal">
+    <div class="sec-label" data-i18n="skills_label">技术栈</div>
+    <div class="sec-title" data-i18n="skills_title">全栈技术覆盖</div>
+    <div class="sec-desc" data-i18n="skills_desc">从后端架构到前端交互，从传统开发到 AI 应用</div>
+  </div>
+  <div class="skills-row">
+    <div class="skill-group reveal">
+      <h4><span class="emoji">⚙️</span> <span data-i18n="sk_be">后端开发</span></h4>
+      <div class="tags">
+        <span class="tag">Java</span><span class="tag">Spring Boot</span>
+        <span class="tag">Spring Cloud</span><span class="tag">MyBatis</span>
+        <span class="tag">MySQL</span><span class="tag">Redis</span><span class="tag">Kafka</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <h4><span class="emoji">🎨</span> <span data-i18n="sk_fe">前端开发</span></h4>
+      <div class="tags">
+        <span class="tag">React</span><span class="tag">TypeScript</span>
+        <span class="tag">Next.js</span><span class="tag">Vue 3</span>
+        <span class="tag">Tailwind</span><span class="tag">Vite</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <h4><span class="emoji">🤖</span> <span data-i18n="sk_ai">AI 应用</span></h4>
+      <div class="tags">
+        <span class="tag">Spring AI</span><span class="tag">OpenAI</span>
+        <span class="tag">RAG</span><span class="tag">LangChain4j</span>
+        <span class="tag">Vector DB</span><span class="tag">Agent</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <h4><span class="emoji">🚀</span> <span data-i18n="sk_ops">DevOps</span></h4>
+      <div class="tags">
+        <span class="tag">Docker</span><span class="tag">Nginx</span>
+        <span class="tag">Linux</span><span class="tag">Git</span>
+        <span class="tag">CI/CD</span><span class="tag">K8s</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    // Scroll animation
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
+<!-- Projects -->
+<section id="projects">
+  <div class="reveal">
+    <div class="sec-label" data-i18n="proj_label">精选项目</div>
+    <div class="sec-title" data-i18n="proj_title">实践成果</div>
+    <div class="sec-desc" data-i18n="proj_desc">从知识分享到 AI 应用的全栈实践</div>
+  </div>
+  <div class="projects-row">
+    <div class="project reveal">
+      <div class="project-top">
+        <span class="project-icon">📘</span>
+        <a href="https://github.com/beiluoL/frontend-interview-guide" target="_blank" class="project-link">GitHub ↗</a>
+      </div>
+      <h3 data-i18n="p1_title">前端面试要点指南</h3>
+      <p data-i18n="p1_desc">面向 Java 开发者的前端全栈进阶指南，18 个章节、3000+ 行，覆盖 JS、React、TS、Next.js、AI 项目实战。</p>
+      <div class="tags">
+        <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Spring AI</span>
+      </div>
+    </div>
+    <div class="project reveal">
+      <div class="project-top">
+        <span class="project-icon">🤖</span>
+        <a href="https://github.com/beiluoL" target="_blank" class="project-link">GitHub ↗</a>
+      </div>
+      <h3 data-i18n="p2_title">AI 智能对话平台</h3>
+      <p data-i18n="p2_desc">Spring AI + React 全栈对话系统，SSE 流式输出、多轮对话、Token 计费、对话历史管理。</p>
+      <div class="tags">
+        <span class="tag">Spring Boot</span><span class="tag">Spring AI</span><span class="tag">SSE</span>
+      </div>
+    </div>
+    <div class="project reveal">
+      <div class="project-top">
+        <span class="project-icon">📚</span>
+        <a href="https://github.com/beiluoL" target="_blank" class="project-link">GitHub ↗</a>
+      </div>
+      <h3 data-i18n="p3_title">RAG 知识库问答</h3>
+      <p data-i18n="p3_desc">向量数据库 + 大模型检索增强生成，PDF 解析、智能分块、语义检索，私有知识库精准问答。</p>
+      <div class="tags">
+        <span class="tag">Milvus</span><span class="tag">Embedding</span><span class="tag">RAG</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+<!-- Blogs -->
+<section id="blogs">
+  <div class="reveal">
+    <div class="sec-label" data-i18n="blog_label">技术博客</div>
+    <div class="sec-title" data-i18n="blog_title">持续输出，分享成长</div>
+    <div class="sec-desc" data-i18n="blog_desc">在多个平台记录技术探索与实践心得</div>
+  </div>
+  <div class="blogs-row">
+    <a href="https://www.cnblogs.com/beiluoL" target="_blank" class="blog-card reveal">
+      <div class="blog-icon cnblogs">📗</div>
+      <h4 data-i18n="blog_cnblogs">博客园</h4>
+      <p>cnblogs.com/beiluoL</p>
+    </a>
+    <a href="https://blog.csdn.net/beiluoL" target="_blank" class="blog-card reveal">
+      <div class="blog-icon csdn">📕</div>
+      <h4>CSDN</h4>
+      <p>blog.csdn.net/beiluoL</p>
+    </a>
+    <div class="blog-card reveal">
+      <div class="blog-icon wechat">💬</div>
+      <h4 data-i18n="blog_wechat">公众号 · 北落拾光</h4>
+      <p data-i18n="blog_wechat_desc">个人学习公众号，分享全栈与 AI 实战</p>
+    </div>
+    <a href="https://github.com/beiluoL" target="_blank" class="blog-card reveal">
+      <div class="blog-icon github">🐙</div>
+      <h4>GitHub</h4>
+      <p>github.com/beiluoL</p>
+    </a>
+  </div>
+</section>
 
-    // Load saved language preference (default: zh)
-    const savedLang = localStorage.getItem('lang') || 'zh';
-    setLang(savedLang);
-  </script>
+<!-- Contact -->
+<section id="contact">
+  <div class="contact-box reveal">
+    <h2 data-i18n="ct_title">一起构建更好的产品</h2>
+    <p data-i18n="ct_desc">技术讨论、项目合作、工作机会 — 随时欢迎联系</p>
+    <div class="contact-btns">
+      <a href="mailto:710980260@qq.com" class="btn btn-glow">📧 Email</a>
+      <a href="https://github.com/beiluoL" target="_blank" class="btn btn-ghost">💻 GitHub</a>
+      <a href="https://www.cnblogs.com/beiluoL" target="_blank" class="btn btn-ghost" data-i18n="ct_cnblogs">📗 博客园</a>
+      <a href="https://blog.csdn.net/beiluoL" target="_blank" class="btn btn-ghost">📕 CSDN</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 beiluoL · <span data-i18n="footer">用心写代码，认真生活</span></p>
+</footer>
+
+<script>
+const T = {
+  zh: {
+    nav_about:'关于', nav_skills:'技能', nav_projects:'项目', nav_blogs:'博客', nav_contact:'联系',
+    hero_tag:'开放合作 · 持续学习',
+    hero_hi:'你好，我是',
+    hero_sub:'全栈开发工程师 — 专注 Java 后端与前端技术深度融合，致力于打造高性能、高可用的 Web 应用与 AI 智能产品。',
+    hero_cta1:'浏览项目 →', hero_cta2:'技术博客',
+    about_label:'关于我', about_title:'热爱代码，享受解决问题', about_desc:'从后端到前端，从传统架构到 AI 应用，不断拓展技术边界',
+    about_p1:'我是一名全栈开发工程师，拥有扎实的 Java 后端开发功底，熟悉 Spring Boot / Spring Cloud 微服务架构、分布式系统设计，同时深入掌握 React、TypeScript、Next.js 等现代前端技术栈。',
+    about_p2:'近期专注于 AI 全栈应用方向 — 大模型对话系统（SSE 流式输出）、RAG 知识库问答、AI Agent 工作流编排平台，致力于将 AI 能力落地到工程实践中。',
+    about_p3:'活跃于技术社区，在博客园、CSDN 持续输出技术文章，同时运营个人学习公众号「北落拾光」，分享全栈开发与 AI 应用实战经验。',
+    stat_exp:'年开发经验', stat_proj:'项目经历', stat_oss:'行开源代码',
+    code_role:'全栈开发工程师', code_loc:'中国',
+    skills_label:'技术栈', skills_title:'全栈技术覆盖', skills_desc:'从后端架构到前端交互，从传统开发到 AI 应用',
+    sk_be:'后端开发', sk_fe:'前端开发', sk_ai:'AI 应用', sk_ops:'DevOps',
+    proj_label:'精选项目', proj_title:'实践成果', proj_desc:'从知识分享到 AI 应用的全栈实践',
+    p1_title:'前端面试要点指南', p1_desc:'面向 Java 开发者的前端全栈进阶指南，18 个章节、3000+ 行，覆盖 JS、React、TS、Next.js、AI 项目实战。',
+    p2_title:'AI 智能对话平台', p2_desc:'Spring AI + React 全栈对话系统，SSE 流式输出、多轮对话、Token 计费、对话历史管理。',
+    p3_title:'RAG 知识库问答', p3_desc:'向量数据库 + 大模型检索增强生成，PDF 解析、智能分块、语义检索，私有知识库精准问答。',
+    blog_label:'技术博客', blog_title:'持续输出，分享成长', blog_desc:'在多个平台记录技术探索与实践心得',
+    blog_cnblogs:'博客园', blog_wechat:'公众号 · 北落拾光', blog_wechat_desc:'个人学习公众号，分享全栈与 AI 实战',
+    ct_title:'一起构建更好的产品', ct_desc:'技术讨论、项目合作、工作机会 — 随时欢迎联系', ct_cnblogs:'📗 博客园',
+    footer:'用心写代码，认真生活'
+  },
+  en: {
+    nav_about:'About', nav_skills:'Skills', nav_projects:'Projects', nav_blogs:'Blog', nav_contact:'Contact',
+    hero_tag:'Open to Collaborate · Always Learning',
+    hero_hi:"Hi, I'm",
+    hero_sub:'Full Stack Developer — Specializing in deep integration of Java backend and modern frontend, building high-performance web apps & AI products.',
+    hero_cta1:'View Projects →', hero_cta2:'Tech Blog',
+    about_label:'About', about_title:'Love coding, enjoy problem solving', about_desc:'Expanding tech boundaries from backend to frontend, from traditional architecture to AI',
+    about_p1:"I'm a full stack developer with solid Java backend expertise — Spring Boot / Spring Cloud microservices, distributed systems — combined with deep proficiency in React, TypeScript, Next.js and modern frontend stacks.",
+    about_p2:'Currently focused on AI full-stack applications — LLM chat systems (SSE streaming), RAG knowledge base Q&A, AI Agent workflow orchestration platforms — bringing AI capabilities into engineering practice.',
+    about_p3:"Active in tech communities, publishing articles on CNBlogs and CSDN, while running a personal WeChat Official Account '北落拾光' sharing full-stack and AI development insights.",
+    stat_exp:'Years Experience', stat_proj:'Projects', stat_oss:'Lines OSS Code',
+    code_role:'Full Stack Developer', code_loc:'China',
+    skills_label:'Tech Stack', skills_title:'Full-stack Coverage', skills_desc:'From backend architecture to frontend interaction, from traditional dev to AI apps',
+    sk_be:'Backend', sk_fe:'Frontend', sk_ai:'AI Apps', sk_ops:'DevOps',
+    proj_label:'Featured', proj_title:'Practice & Results', proj_desc:'Full-stack practice from knowledge sharing to AI applications',
+    p1_title:'Frontend Interview Guide', p1_desc:'Comprehensive frontend guide for Java devs — 18 chapters, 3000+ lines covering JS, React, TS, Next.js, and AI project practices.',
+    p2_title:'AI Chat Platform', p2_desc:'Full-stack chat system with Spring AI + React — SSE streaming, multi-turn conversations, token tracking, history management.',
+    p3_title:'RAG Knowledge Base Q&A', p3_desc:'Vector DB + LLM retrieval-augmented generation — PDF parsing, smart chunking, semantic search for private knowledge Q&A.',
+    blog_label:'Tech Blog', blog_title:'Continuous Output & Sharing', blog_desc:'Documenting tech exploration and practice across platforms',
+    blog_cnblogs:'CNBlogs', blog_wechat:'WeChat · 北落拾光', blog_wechat_desc:'Personal account sharing full-stack & AI insights',
+    ct_title:"Let's Build Something Great", ct_desc:'Tech discussions, project collaboration, job opportunities — feel free to reach out', ct_cnblogs:'📗 CNBlogs',
+    footer:'Code with heart, live with purpose'
+  }
+};
+
+let lang = localStorage.getItem('lang') || 'zh';
+
+function setLang(l) {
+  lang = l;
+  document.documentElement.lang = l === 'zh' ? 'zh-CN' : 'en';
+  document.querySelectorAll('.lang-btn').forEach(b =>
+    b.classList.toggle('active', (l==='zh' && b.textContent==='中文') || (l==='en' && b.textContent==='EN'))
+  );
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if (T[l][k]) el.textContent = T[l][k];
+  });
+  localStorage.setItem('lang', l);
+}
+
+setLang(lang);
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
 
 </body>
 </html>
