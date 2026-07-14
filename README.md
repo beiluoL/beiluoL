@@ -60,11 +60,11 @@
 ## 📊 GitHub 统计
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=beiluoL&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&locale=cn" alt="stats" />
+  <img src="https://github-stats.pages.dev/api?username=beiluoL&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&locale=cn" alt="stats" />
 </p>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=beiluoL&layout=compact&theme=tokyonight&hide_border=true" alt="languages" />
+  <img src="https://github-stats.pages.dev/api/top-langs/?username=beiluoL&layout=compact&theme=tokyonight&hide_border=true" alt="languages" />
 </p>
 
 ---
