@@ -3,7 +3,7 @@
 
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=beiluoL&label=访客&color=8b5cf6&style=flat-square" alt="views" />
-  <img src="https://img.shields.io/github/followers/beiluoL?label=关注&style=social" alt="followers" />
+  <img src="https://img.shields.io/github/followers/beiluoL?label=Followers&style=social" alt="followers" />
 </p>
 
 <p align="center">
@@ -60,11 +60,15 @@
 ## 📊 GitHub 统计
 
 <p align="center">
-  <img src="https://github-stats.pages.dev/api?username=beiluoL&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&locale=cn" alt="stats" />
+  <a href="https://github.com/beiluoL">
+    <img src="https://streak-stats.demolab.com/?user=beiluoL&theme=tokyonight&hide_border=true&locale=zh_Hans" alt="GitHub Streak" />
+  </a>
 </p>
 
 <p align="center">
-  <img src="https://github-stats.pages.dev/api/top-langs/?username=beiluoL&layout=compact&theme=tokyonight&hide_border=true" alt="languages" />
+  <a href="https://github.com/beiluoL">
+    <img src="https://ghchart.rshah.org/4F46E5/beiluoL" alt="GitHub Contributions" />
+  </a>
 </p>
 
 ---
