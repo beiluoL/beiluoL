@@ -47,6 +47,16 @@
 
 ## 📚 精选项目
 
+### 🎓 [Learnbase · AI 知识库与学习平台](https://github.com/beiluoL/learnbase)
+> 面向学习场景的知识库 + AI 学习平台 — **文档浏览 / 搜索 / 上传 + AI 对话答疑**
+>
+> 系统化学习路径（章节 + 闪卡 + 测验 + 写作 + 代码练习）+ 游戏化激励（等级 / 经验 / 连续打卡）
+
+### 🧠 [RAG 企业级知识库问答系统](https://github.com/beiluoL/rag-knowledge-qa-system)
+> Spring Boot + Vue 3 全栈 RAG 系统 — **本地离线 + 云端在线双模式一键切换**
+>
+> 离线模式（Ollama + Qwen2.5）/ 在线模式（阿里云百炼 DashScope）
+
 ### 📘 [前端面试要点指南](https://github.com/beiluoL/frontend-interview-guide)
 > 面向 Java 开发者的前端全栈进阶指南 — **18 个章节 · 3000+ 行**
 >
@@ -54,11 +64,6 @@
 
 ![Stars](https://img.shields.io/github/stars/beiluoL/frontend-interview-guide?style=social)
 ![Last Commit](https://img.shields.io/github/last-commit/beiluoL/frontend-interview-guide?style=flat-square)
-
-### 🎓 [Learn Hub 编程学习平台](https://beiluol.github.io/learn-hub/)
-> 一站式编程学习平台 — **Java · Python · 前端 · AI · 大模型**
->
-> 系统化学习资源与实战项目，从入门到进阶全覆盖
 
 ---
 
