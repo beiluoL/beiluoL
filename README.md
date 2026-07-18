@@ -55,6 +55,11 @@
 ![Stars](https://img.shields.io/github/stars/beiluoL/frontend-interview-guide?style=social)
 ![Last Commit](https://img.shields.io/github/last-commit/beiluoL/frontend-interview-guide?style=flat-square)
 
+### 🎓 [Learn Hub 编程学习平台](https://beiluol.github.io/learn-hub/)
+> 一站式编程学习平台 — **Java · Python · 前端 · AI · 大模型**
+>
+> 系统化学习资源与实战项目，从入门到进阶全覆盖
+
 ---
 
 ## 📊 GitHub 统计
