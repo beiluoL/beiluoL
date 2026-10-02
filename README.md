@@ -1,148 +1,77 @@
-<h1 align="center">👋 你好，我是 beiluoL</h1>
-<h3 align="center">全栈开发工程师 · Java + Vue + AI 全栈 · AI Coding 实践者</h3>
+<div align="right">
+  <strong>简体中文</strong> · <a href="README.en.md">English</a>
+</div>
 
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=beiluoL&label=访客&color=8b5cf6&style=flat-square" alt="views" />
-  <img src="https://img.shields.io/github/followers/beiluoL?label=Followers&style=social" alt="followers" />
-</p>
+<div align="center">
 
-<p align="center">
-  <a href="https://beiluol.github.io/beiluoL">🌐 个人主页（中英文）</a>
-</p>
+# 你好，我是北落 · Beiluo
 
----
+### Java 后端 × AI 应用工程师
 
-## 📌 关于我
+**用 Java 构建可落地的 AI 应用，让知识与创意变成作品。**
 
-- 🔭 全栈开发工程师，专注 **Java 后端 + Vue 前端 + AI 应用**
-- 🚀 正在维护的开源项目：**EasyAICoding**（让小白也能用 AI 做出自己的软件）、**EasyVibeCoding**（Vibe Coding 工程化方法论）
-- 🌱 当前探索：**AI 全栈应用** — 大模型对话、RAG 知识库、AI Agent 工作流、AI Coding 实践
-- 🧠 正在开发：**knowflow**（AI 知识库与学习平台）、**LectoForge**（macOS 学习闭环桌面应用）
-- ✍️ 活跃于技术社区：[博客园](https://www.cnblogs.com/beiluoL) · [CSDN](https://blog.csdn.net/beiluoL) · [Gitee](https://gitee.com/beiluol)
-- 💬 个人学习公众号：**「北落拾光」** — 分享全栈开发与 AI 实战
-- 📫 联系邮箱：**710980260@qq.com**
+Java · Spring Boot · RAG · AI Agent · Vue 3
 
----
+[精选项目](#精选项目) · [一画见华夏](#一画见华夏) · [联系我](#联系我)
 
-## 🛠️ 技术栈
+</div>
 
-**后端**
-![Java](https://img.shields.io/badge/-Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/-Spring_Boot-6DB33F?style=flat-square&logo=spring-boot&logoColor=white)
-![Spring Cloud](https://img.shields.io/badge/-Spring_Cloud-6DB33F?style=flat-square&logo=spring&logoColor=white)
-![MySQL](https://img.shields.io/badge/-MySQL-005C84?style=flat-square&logo=mysql&logoColor=white)
-![Redis](https://img.shields.io/badge/-Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
+## 关于我
 
-**前端**
-![Vue.js](https://img.shields.io/badge/-Vue.js-35495E?style=flat-square&logo=vuedotjs&logoColor=4FC08D)
-![React](https://img.shields.io/badge/-React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
-![TypeScript](https://img.shields.io/badge/-TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)
-![Next.js](https://img.shields.io/badge/-Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white)
-![Tailwind](https://img.shields.io/badge/-Tailwind-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
+约 6 年 Java 后端与全栈开发经验，当前聚焦 **Java + AI 应用开发**。
 
-**AI & DevOps**
-![Spring AI](https://img.shields.io/badge/-Spring_AI-6DB33F?style=flat-square&logo=spring&logoColor=white)
-![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![Git](https://img.shields.io/badge/-Git-F05032?style=flat-square&logo=git&logoColor=white)
+我关注从文档处理、知识检索、模型调用到权限管理、流式交互与工程验证的完整链路，也用 Vue 构建可用的产品界面。持续探索 RAG、Agent 和 AI 编程协作，把实践沉淀成开源项目与学习资料。
 
-**AI Coding**
-![Cursor](https://img.shields.io/badge/-Cursor-000000?style=flat-square)
-![Codex](https://img.shields.io/badge/-Codex-412991?style=flat-square)
-![Claude Code](https://img.shields.io/badge/-Claude_Code-D97757?style=flat-square)
+## 精选项目
 
----
+| 项目 | 解决什么问题 | 技术 / 方向 |
+| --- | --- | --- |
+| [**rag-knowledge-qa-system**](https://github.com/beiluoL/rag-knowledge-qa-system) | 基于 Java 的 RAG 知识库问答应用，串联文档入库、向量检索、流式回答与引用溯源。 | Java · Spring Boot · Spring AI · Vue 3 · PostgreSQL · pgvector |
+| [**knowflow**](https://github.com/beiluoL/knowflow) | 把知识管理、RAG 问答、间隔复习与编程 Agent 连接起来的 Java + Vue 全栈学习平台。 | Java · Spring Boot · Spring Security · Vue 3 · TypeScript · MySQL |
+| [**LectoForge**](https://github.com/beiluoL/LectoForge) | 面向 macOS 的学习工作台，把收集、整理、复习与输出连接成日常学习闭环。 | Tauri 2 · Rust · Vue 3 · TypeScript · Fastify · SQLite |
+| [**ai-engineer-journey**](https://github.com/beiluoL/ai-engineer-journey) | Project First：通过 10 个连续项目，从 Python 与 LLM API 逐步实践 RAG、Agent、微调、评估与部署。 | Python · FastAPI · RAG · MCP · PyTorch · Transformer · LoRA / QLoRA |
+| [**EasyVibeCoding**](https://github.com/beiluoL/EasyVibeCoding) | AI 编程工程化实践手册：组织提示词、技能、工作流、案例与失败复盘，让开发过程可复用、可检查。 | AI Coding · Prompts · Skills · Workflows · Markdown · Python |
+| [**EasyAICoding**](https://github.com/beiluoL/EasyAICoding) | 面向零基础的 AI 编程入门指南：从一个想法出发，分步骤学习运行、调试、测试与发布自己的软件。 | AI Coding · Prompts · Tutorials · Debugging · Testing · Deployment |
 
-## 📚 精选项目
+**建议阅读顺序：** 先看 RAG 项目了解 Java + AI 工程实践，再看 knowflow 的学习与 Agent 场景，以及 LectoForge 的本地桌面产品设计。
 
-### 🚀 [EasyAICoding — 让小白也能用 AI 做出自己的软件](https://github.com/beiluoL/EasyAICoding)
-> 面向零基础的开源项目：从想法到软件 — Getting Started、Learning Roadmap、Prompt Library、Tutorials、Beginner Cases、Debug Library、Templates
->
-> 中文定位：让小白也能用 AI 做出自己的软件；核心理念：把想法变成软件。
+学习仓库与方法论仓库持续演进，具体完成度与验证状态以各仓库文档为准。
 
-![Stars](https://img.shields.io/github/stars/beiluoL/EasyAICoding?style=social)
-![Last Commit](https://img.shields.io/github/last-commit/beiluoL/EasyAICoding?style=flat-square)
+## 技术与实践
 
-### 🧠 [EasyVibeCoding — Vibe Coding 工程化方法论](https://github.com/beiluoL/EasyVibeCoding)
-> 一套开源的「Vibe Coding 工程化方法论」：Skill / Prompt / Case / Workflow / Failure / Anti-Pattern / Benchmark
->
-> 让不会编程的人，也能用 AI 按工程化方式做出真正能运行的软件。
+| 方向 | 当前使用与关注 |
+| --- | --- |
+| Java 后端 | Java、Spring Boot、Spring Security、MySQL、PostgreSQL、Redis |
+| AI 应用 | RAG、Tool Calling、Spring AI、LangChain4j、pgvector、Milvus、Ollama |
+| 前端与桌面 | Vue 3、TypeScript、Vite、Tauri |
+| 工程协作 | Git、Docker、Linux、Coding Agents、代码审查与验证 |
 
-![Stars](https://img.shields.io/github/stars/beiluoL/EasyVibeCoding?style=social)
-![Last Commit](https://img.shields.io/github/last-commit/beiluoL/EasyVibeCoding?style=flat-square)
+**继续学习：** 模型部署、评估与 LoRA / QLoRA 微调。学习记录放在 [AI Engineer Journey](https://github.com/beiluoL/ai-engineer-journey)，与已完成项目区分。
 
-### 🎓 [knowflow — AI 知识库与学习平台](https://github.com/beiluoL/knowflow)
-> Vue 3 + Spring Boot 全栈：文档浏览 / 搜索 / 上传 + AI 对话答疑
->
-> 系统化学习路径（章节 + 闪卡 + 测验 + 写作 + 代码练习）+ 游戏化激励（等级 / 经验 / 能量 / 连续打卡）
+## 一画见华夏
 
-![Stars](https://img.shields.io/github/stars/beiluoL/knowflow?style=social)
-![Last Commit](https://img.shields.io/github/last-commit/beiluoL/knowflow?style=flat-square)
+**微信公众号「一画见华夏」——用手绘漫画与故事分享中华文化。**
 
-### 💻 [LectoForge — 学习闭环桌面应用](https://github.com/beiluoL/LectoForge)
-> macOS 本地优先的学习闭环桌面应用：输入 → 整理 → 复习 → 输出
->
-> 让每一条知识都被真正记住、能用、可复述。
+一幅画、一个故事、一段历史。围绕历史人物、山河、文物、古建筑、节日民俗与诗词非遗，探索温暖、克制、有考据的文化表达。
 
-### 🧠 [RAG 企业级知识库问答系统](https://github.com/beiluoL/rag-knowledge-qa-system)
-> Spring Boot + Vue 3 全栈 RAG 系统 — **本地离线 + 云端在线双模式一键切换**
->
-> 离线模式（Ollama + Qwen2.5）/ 在线模式（阿里云百炼 DashScope）
+这是我的文化内容创作方向，也是一项运用 AI 辅助视觉叙事与知识传播的实践。
+
+## 更多学习资料
+
+[前端面试指南](https://github.com/beiluoL/frontend-interview-guide) · [大模型学习手册](https://github.com/beiluoL/llm-learning-handbook) · [Python 学习指南](https://github.com/beiluoL/python-learning-guide) · [Java 学习案例](https://github.com/beiluoL/java-learning-cases) · [Git 镜像工具](https://github.com/beiluoL/git-mirror)
+
+## 联系我
+
+[个人网站](https://beiluol.github.io/beiluoL) · [博客园](https://www.cnblogs.com/beiluoL) · [CSDN](https://blog.csdn.net/beiluoL) · [Gitee](https://gitee.com/beiluol) · [邮件](mailto:710980260@qq.com)
+
+欢迎交流 Java + AI 应用、RAG、Agent 与开源协作。
 
 ---
 
-## 📖 学习与教程仓库
+<div align="center">
 
-- 📘 [前端面试要点指南](https://github.com/beiluoL/frontend-interview-guide) — 面向 Java 开发者的前端全栈进阶指南
-- 📗 [AI / 大模型应用开发学习手册](https://github.com/beiluoL/llm-learning-handbook)
-- 📙 [Python 学习指南](https://github.com/beiluoL/python-learning-guide)
-- 📕 [Java 学习案例汇总](https://github.com/beiluoL/java-learning-cases)
-- 🔁 [GitHub ⇄ Gitee 双向镜像工具](https://github.com/beiluoL/git-mirror) — SSH 优先、零依赖、批量同步
+**构建 · 学习 · 创作 · 分享**
 
----
+Java × AI × Open Source × Chinese Culture
 
-## 📊 GitHub 统计
-
-<p align="center">
-  <a href="https://github.com/beiluoL">
-    <img src="https://streak-stats.demolab.com/?user=beiluoL&theme=tokyonight&hide_border=true&locale=zh_Hans" alt="GitHub Streak" />
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/beiluoL">
-    <img src="https://ghchart.rshah.org/4F46E5/beiluoL" alt="GitHub Contributions" />
-  </a>
-</p>
-
----
-
-## 🔗 找到我
-
-<p align="center">
-  <a href="mailto:710980260@qq.com">
-    <img src="https://img.shields.io/badge/Email-710980260@qq.com-D14836?style=flat-square&logo=gmail&logoColor=white" />
-  </a>
-  <a href="https://github.com/beiluoL">
-    <img src="https://img.shields.io/badge/GitHub-beiluoL-181717?style=flat-square&logo=github&logoColor=white" />
-  </a>
-  <a href="https://www.cnblogs.com/beiluoL">
-    <img src="https://img.shields.io/badge/博客园-beiluoL-2E8B57?style=flat-square&logo=blogger&logoColor=white" />
-  </a>
-  <a href="https://blog.csdn.net/beiluoL">
-    <img src="https://img.shields.io/badge/CSDN-beiluoL-FC5531?style=flat-square&logo=c&logoColor=white" />
-  </a>
-  <a href="https://gitee.com/beiluol">
-    <img src="https://img.shields.io/badge/Gitee-beiluol-C71D27?style=flat-square&logo=gitee&logoColor=white" />
-  </a>
-</p>
-
-<p align="center">
-  <br>
-  <strong>💬 公众号「北落拾光」</strong> — 分享全栈开发与 AI 应用实战
-</p>
-
----
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6&height=100&section=footer" />
-</p>
+</div>
