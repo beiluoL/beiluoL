@@ -10,11 +10,20 @@
 
 **用 Java 构建可落地的 AI 应用，让知识与创意变成作品。**
 
-Java · Spring Boot · RAG · AI Agent · Vue 3
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vue_3-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/AI_Application-A855F7?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/RAG-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Open_to_Collaborate-22c55e?style=for-the-badge" />
+</p>
 
-[精选项目](#精选项目) · [一画见华夏](#一画见华夏) · [联系我](#联系我)
+<a href="#精选项目">精选项目</a> · <a href="#一画见华夏">一画见华夏</a> · <a href="#联系我">联系我</a>
 
 </div>
+
+---
 
 ## 关于我
 
@@ -39,12 +48,53 @@ Java · Spring Boot · RAG · AI Agent · Vue 3
 
 ## 技术与实践
 
-| 方向 | 当前使用与关注 |
-| --- | --- |
-| Java 后端 | Java、Spring Boot、Spring Security、MySQL、PostgreSQL、Redis |
-| AI 应用 | RAG、Tool Calling、Spring AI、LangChain4j、pgvector、Milvus、Ollama |
-| 前端与桌面 | Vue 3、TypeScript、Vite、Tauri |
-| 工程协作 | Git、Docker、Linux、Coding Agents、代码审查与验证 |
+<details open>
+<summary><strong>🧱 Java 后端</strong></summary>
+
+<p>
+  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=spring&logoColor=white" />
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" />
+</p>
+</details>
+
+<details open>
+<summary><strong>🤖 AI 应用</strong></summary>
+
+<p>
+  <img src="https://img.shields.io/badge/RAG-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Tool_Calling-A855F7?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Spring_AI-6DB33F?style=for-the-badge&logo=spring&logoColor=white" />
+  <img src="https://img.shields.io/badge/LangChain4j-1296DB?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/pgvector-4169E1?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Milvus-00A82E?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Ollama-000000?style=for-the-badge" />
+</p>
+</details>
+
+<details open>
+<summary><strong>🎨 前端与桌面</strong></summary>
+
+<p>
+  <img src="https://img.shields.io/badge/Vue_3-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tauri-FFC131?style=for-the-badge" />
+</p>
+</details>
+
+<details open>
+<summary><strong>🛠 工程协作</strong></summary>
+
+<p>
+  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" />
+</p>
+</details>
 
 **继续学习：** 模型部署、评估与 LoRA / QLoRA 微调。学习记录放在 [AI Engineer Journey](https://github.com/beiluoL/ai-engineer-journey)，与已完成项目区分。
 
@@ -58,11 +108,17 @@ Java · Spring Boot · RAG · AI Agent · Vue 3
 
 ## 更多学习资料
 
-[前端面试指南](https://github.com/beiluoL/frontend-interview-guide) · [大模型学习手册](https://github.com/beiluoL/llm-learning-handbook) · [Python 学习指南](https://github.com/beiluoL/python-learning-guide) · [Java 学习案例](https://github.com/beiluoL/java-learning-cases) · [Git 镜像工具](https://github.com/beiluoL/git-mirror)
+📖 [前端面试指南](https://github.com/beiluoL/frontend-interview-guide) · 📚 [大模型学习手册](https://github.com/beiluoL/llm-learning-handbook) · 🐍 [Python 学习指南](https://github.com/beiluoL/python-learning-guide) · ☕ [Java 学习案例](https://github.com/beiluoL/java-learning-cases) · 🔧 [Git 镜像工具](https://github.com/beiluoL/git-mirror)
 
 ## 联系我
 
-[个人网站](https://beiluol.github.io/beiluoL) · [博客园](https://www.cnblogs.com/beiluoL) · [CSDN](https://blog.csdn.net/beiluoL) · [Gitee](https://gitee.com/beiluol) · [邮件](mailto:710980260@qq.com)
+<p align="center">
+  <a href="https://beiluol.github.io/beiluoL">🌐 个人网站</a> ·
+  <a href="https://www.cnblogs.com/beiluoL">📗 博客园</a> ·
+  <a href="https://blog.csdn.net/beiluoL">📕 CSDN</a> ·
+  <a href="https://gitee.com/beiluol">🔴 Gitee</a> ·
+  <a href="mailto:710980260@qq.com">✉️ 邮件</a>
+</p>
 
 欢迎交流 Java + AI 应用、RAG、Agent 与开源协作。
 

@@ -10,11 +10,20 @@
 
 **Building practical AI applications with Java, and turning knowledge and ideas into work people can use.**
 
-Java · Spring Boot · RAG · AI Agent · Vue 3
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vue_3-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/AI_Application-A855F7?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/RAG-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Open_to_Collaborate-22c55e?style=for-the-badge" />
+</p>
 
-[Featured projects](#featured-projects) · [Chinese culture](#chinese-culture--一画见华夏) · [Connect](#connect)
+<a href="#featured-projects">Featured projects</a> · <a href="#chinese-culture--一画见华夏">Chinese culture</a> · <a href="#connect">Connect</a>
 
 </div>
+
+---
 
 ## About me
 
@@ -39,12 +48,53 @@ Learning resources and methodology projects are evolving. Refer to each reposito
 
 ## Technology & practice
 
-| Area | Tools and interests |
-| --- | --- |
-| Java backend | Java, Spring Boot, Spring Security, MySQL, PostgreSQL, Redis |
-| AI applications | RAG, Tool Calling, Spring AI, LangChain4j, pgvector, Milvus, Ollama |
-| Frontend & desktop | Vue 3, TypeScript, Vite, Tauri |
-| Engineering | Git, Docker, Linux, Coding Agents, code review and verification |
+<details open>
+<summary><strong>🧱 Java Backend</strong></summary>
+
+<p>
+  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=spring&logoColor=white" />
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" />
+</p>
+</details>
+
+<details open>
+<summary><strong>🤖 AI Applications</strong></summary>
+
+<p>
+  <img src="https://img.shields.io/badge/RAG-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Tool_Calling-A855F7?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Spring_AI-6DB33F?style=for-the-badge&logo=spring&logoColor=white" />
+  <img src="https://img.shields.io/badge/LangChain4j-1296DB?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/pgvector-4169E1?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Milvus-00A82E?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Ollama-000000?style=for-the-badge" />
+</p>
+</details>
+
+<details open>
+<summary><strong>🎨 Frontend & Desktop</strong></summary>
+
+<p>
+  <img src="https://img.shields.io/badge/Vue_3-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tauri-FFC131?style=for-the-badge" />
+</p>
+</details>
+
+<details open>
+<summary><strong>🛠 Engineering</strong></summary>
+
+<p>
+  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" />
+</p>
+</details>
 
 **Continuing to learn:** model deployment, evaluation and LoRA / QLoRA fine-tuning. I track this work separately from completed projects in [AI Engineer Journey](https://github.com/beiluoL/ai-engineer-journey).
 
@@ -58,11 +108,17 @@ This is my cultural content project and an exploration of AI-assisted visual sto
 
 ## More learning resources
 
-[Frontend interview guide](https://github.com/beiluoL/frontend-interview-guide) · [LLM handbook](https://github.com/beiluoL/llm-learning-handbook) · [Python guide](https://github.com/beiluoL/python-learning-guide) · [Java examples](https://github.com/beiluoL/java-learning-cases) · [Git mirror tool](https://github.com/beiluoL/git-mirror)
+📖 [Frontend interview guide](https://github.com/beiluoL/frontend-interview-guide) · 📚 [LLM handbook](https://github.com/beiluoL/llm-learning-handbook) · 🐍 [Python guide](https://github.com/beiluoL/python-learning-guide) · ☕ [Java examples](https://github.com/beiluoL/java-learning-cases) · 🔧 [Git mirror tool](https://github.com/beiluoL/git-mirror)
 
 ## Connect
 
-[Website](https://beiluol.github.io/beiluoL) · [CNBlogs](https://www.cnblogs.com/beiluoL) · [CSDN](https://blog.csdn.net/beiluoL) · [Gitee](https://gitee.com/beiluol) · [Email](mailto:710980260@qq.com)
+<p align="center">
+  <a href="https://beiluol.github.io/beiluoL">🌐 Website</a> ·
+  <a href="https://www.cnblogs.com/beiluoL">📗 CNBlogs</a> ·
+  <a href="https://blog.csdn.net/beiluoL">📕 CSDN</a> ·
+  <a href="https://gitee.com/beiluol">🔴 Gitee</a> ·
+  <a href="mailto:710980260@qq.com">✉️ Email</a>
+</p>
 
 Open to conversations about Java + AI applications, RAG, agents and open-source collaboration.
 
